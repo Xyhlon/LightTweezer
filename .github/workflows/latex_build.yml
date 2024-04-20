@@ -1,0 +1,37 @@
+name: Compile LaTeX with LuaLaTeX
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+
+    - name: Download and Extract Consolas Font
+      run: |
+        wget https://github.com/pensnarik/consolas-font/raw/master/consolas-fonts-tts.tar.bz2
+        tar xjf consolas-fonts-tts.tar.bz2
+        pdfname=$(find . -maxdepth 1 -type f -name "*.tex" | head -n 1 | sed 's/^\.\///;s/\.tex$/.pdf/')
+        echo "pdfpath=./$pdfname" >> $GITHUB_ENV      
+      shell: bash
+
+    - name: Compile LaTeX document
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: "*.tex"
+        latexmk_use_lualatex: true
+        extra_fonts: |
+          ./Consolas-Bold-Italic.ttf
+          ./Consolas-Bold.ttf
+          ./Consolas-Italic.ttf
+          ./Consolas-Regular.ttf
+    - name: Upload PDF artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pdf-artifact
+        path: ${{ env.pdfpath }}
