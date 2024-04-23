@@ -4,17 +4,18 @@
 \input{protokoll_template/template.latex/input/shared_preamble.tex}
 
 % Kopfzeile
-\ihead{WS22\\
-	19.04.2023}
+\ihead{SS24\\
+	19.04.2024}
 
 \chead{\textsc{Stark} Matthias --- 12004907 \\
 	\textsc{Philipp} Maximilian --- 11839611}
 
-\ohead{FLAB 2 \\
-	Advanced Microscopie}
+\ohead{Research Lab \\
+	Light Tweezers}
 
 % Fußzeile
-\addbibresource{AdvancedMicroscopy.bib}
+%\addbibresource{AdvancedMicroscopy.bib}
+%todo bib
 
 \usepackage{luacode}
 
@@ -39,435 +40,62 @@ dofile("createExtraPDF.lua")
 
 \newpage
 
-\section{Aufgabenstellung}\label{Auf}
+\section{Tasks}\label{Auf}
 
-\subsection{Abbildung durch eine Sammellinse}
-
-\begin{itemize}
-	\item Die Brennweite ist durch den ``Lupeneffekt'' abzuschätzen
-	\item Die Brennweite der Linse ist in einem dafür aufzubauenden Strahlengang mit
-	      Hilfe der Abbildungsgleichung zu bestimmen
-	\item Die Brennweite der Linse ist nach dem Bessel-Verfahren zu berechnen
-	\item Der Abbildungsmaßstab ist auf $A$ = 1 einzustellen
-	\item Die Ergebnisse sind miteinander zu vergleichen und zu diskutieren
-\end{itemize}
-
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
+During the experiment the following steps need to be performed:
 
 \begin{itemize}
-	\item Das 1-Linsen-Mikroskop ist aufzubauen
-	\item Ein Objekt ist mit dem 1-Linsen-Mikroskop nach van Leeuwenhoek abzubilden
-	\item Die Fokuslänge und die Vergrößerung ist zu bestimmen
-\end{itemize}
-
-\subsubsection{Hellfeld-Transmissionsmikroskop}
-
-\begin{itemize}
-	\item Aufbau des Hellfeld-Transmissionsmikroskops
-	\item Ausrichten der Linsen um ein scharfes Bild zu erzeugen
-	\item Linsenorientierung (Objektiv) und sphärische Aberration: Drehen der
-	      Objektiv-Linse (mitsamt Halterung) um 180° und Einbau dieser
-	\item Kohärenz der Beleuchtung: Entfernung des Diffusors
-	\item Wellenlängenabhängigkeit und chromatische Aberration: Verwendung von
-	      verschiedenfarbigen LEDs als Lichtquelle
-	\item Messung der experimentellen Gesamtvergrößerung
-	\item Bestimmung des Auflösevermögens durch Betrachtung der entsprechenden
-	      Balkenpaare
-\end{itemize}
-
-\subsubsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-
-\begin{itemize}
-	\item Aufbau des einfachen Dunkelfeld-Mikroskops
-	\item Vergleich der gemessenen Bilder mit jenen, des zuvor aufgebauten
-	      Hellfeld-Transmissionsmikroskops
-	\item Überlegen und skizzieren eines Dunkelfeld-Aufbaus in einer Auflicht-Variante
+	\item Build a microscope and observe forces on microscopic particles without a laser
+	\item Use the laser as a "gun"\  to hit some microscopic particles
+	\item Trap particles with the laser beam
+	\item Trap "living" \ organisms
+	\item Transfer a angular momentum to a particle
 \end{itemize}
 
 \section{Grundlagen}\label{Grund}
 
-\subsection{Abbildung durch eine Sammellinse}
+% todo bitte mit ai
 
-Vergrößerungsgläser bündeln die Lichtstrahlen und bringen diese näher an das
-Auge heran, um die Nahsicht zu verbessern. Es handelt sich um konvexe Gläser,
-das bedeutet, sie sind in der Mitte dicker und an den Rändern dünner. Wenn
-Licht durch eine konvexe Linse fällt, wird es gebrochen, also der Lichtstrahl
-nach innen abgelenkt, wie in \autoref{fig:strahlengang_linse} sichtbar. Die
-Lichtstrahlen laufen in einem Punkt auf der anderen Seite der Linse zusammen.
-Dieser Punkt wird als Brennpunkt bezeichnet.
+\section{Experimental Setup}\label{sec:versuchsanordnung}
+
+The total setup of the experiment is visible in \autoref{fig:aufbau}. Im general it depends on several cage modules, 
+that were used for the single steps.
 
 \begin{figure}[H]
 	\begin{center}
-		% \includegraphics[width =0.8\textwidth]{./figures/skizze_linsengleichung.JPG}
+		\includegraphics[width =0.7\textwidth]{./figures/aufbau.jpg}
 	\end{center}
-	\caption[Skizze des Strahlengangs durch eine Sammellinse] { Skizze des Strahlengangs
-		durch eine Sammellinse \cite{banzer_advanced_2022} \\
-		$G$ \dots Gegenstand                               \\
-		$g$ \dots Gegenstandsweite                         \\
-		$B$ \dots Bild                                     \\
-		$b$ \dots Bildweite                                \\
-		$f$ \dots Brennweite
-	}\label{fig:strahlengang_linse}
+	\caption[Total experimental setup] {
+		Total experimental setup \\
+		1 \dots Microscope module               \\
+		2 \dots Laser module                                                 \\
+		3 \dots Telescope module \\
+		4 \dots Sample stage \\
+		5 \dots Power supply for light\\
+		6 \dots Power supply for laser\\
+		7 \dots Controller for movement of the sample in x/y-direction\\
+		8 \dots Screw for movement of the sample in z-direction
+	}\label{fig:aufbau}
 \end{figure}
 
-\subsubsection{Lupeneffekt}
-
-Um die Brennweite einer Konvexlinse mit einem Objekt im Unendlichen zu
-ermitteln, kann folgende Formel verwendet werden:
-
-\begin{equation}
-	\frac{1}{f} = \lim_{g\to\infty}\frac{1}{g} +\frac{1}{b} = \frac{1}{b}
-	\label{eq:herleitungAbbildungUnendlich}
-\end{equation}
-
-wobei $f$ die Brennweite und $b$ der Abstand zwischen Objektiv und Bild ist.
-Wenn sich das Objekt im Unendlichen befindet, ist der Abstand $b$ gleich der
-Brennweite $f$, so dass sich die Formel vereinfacht zu:
-
-\begin{equation}
-	f = b
-	\label{eq:AbbildungUnendlich}
-\end{equation}
-
-Das bedeutet, dass die Brennweite eines Objektivs durch Messen des Abstands
-zwischen dem Objektiv und dem Bild bestimmt werden kann, wenn sich das Objekt
-im Unendlichen befindet.
-
-\subsubsection{Abbildungsgleichung}
-Die Formel für dünne Linsen kann verwendet werden, um die Brennweite einer
-konvexen Linse zu berechnen, wenn sich das Objekt nicht im Unendlichen
-befindet. Die Formel lautet:
-
-\begin{equation}
-	\frac{1}{f} = \frac{1}{g} +\frac{1}{b}
-	\label{eq:linsengleichung}
-\end{equation}
-
-Dabei ist $f$ die Brennweite, $g$ ist der Abstand zwischen Objekt und Linse und
-$b$ ist der Abstand zwischen Linse und Bild. Durch Messung der Abstände $g$ und
-$b$ kann die Brennweite mit dieser Formel berechnet werden.
-
-\subsubsection{Bessel Verfahren}
-Die Bessel-Methode ist ein weiteres Verfahren zur Bestimmung der Brennweite
-eines Objektivs. Dabei wird eine Lichtquelle in einem festen Abstand von einer
-konvexen Linse platziert und die Linse hin- und herbewegt, bis zwei Positionen
-gefunden werden, in denen das Bild der Lichtquelle scharf ist. Der Abstand
-zwischen diesen beiden Positionen wird dann in eine Formel zur Berechnung der
-Brennweite der Linse eingesetzt. Die Formel für die Bessel-Methode lautet:
-
-\begin{equation}
-	f = \frac{l^2-w^2}{4l}
-	\label{eq:bessel}
-\end{equation}
-
-Dabei ist $f$ die Brennweite, $l$ der Abstand zwischen den beiden Positionen,
-an denen das Bild scharf abgebildet wird, und $w$ der Abstand zwischen der
-Lichtquelle und dem Objektiv. Diese Methode ist präziser als die Formel für
-dünne Linsen und kann für Objektive mit einer großen Bandbreite an Brennweiten
-% verwendet werden.~\cite{banzer_advanced_2022} %todo \cite
-
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
-Das Mikroskop von van Leeuwenhoek, auch Einlinsen- oder einfaches Mikroskop
-genannt, funktioniert mit einer kleinen, kugelförmigen Linse, die das Bild
-eines Objekts vergrößert. Die Linse ist in einem kleinen Halter mit einer
-Lochblende in der Mitte montiert. Das zu betrachtende Objekt wird sehr nahe an
-die Linse gehalten, und der Beobachter schaut durch die Lochblende auf das
-vergrößerte Bild. Die Linse und das Objekt werden zusammen bewegt, bis das Bild
-scharf ist.
+The single optical components, as well as the beampath are visible in \autoref{fig:aufbau_banzer}.
 
 \begin{figure}[H]
 	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/leeuwenhoek.JPG}
+		\includegraphics[width =0.9\textwidth]{./figures/aufbau_banzer.JPG}
 	\end{center}
-	\caption[1-Linsen-Mikroskop nach van Leeuwenhoek] { 1-Linsen-Mikroskop nach van
-		% Leeuwenhoek \cite{banzer_advanced_2022}
-	}\label{fig:leeuenhoek}
+	\caption[Optical setup] {
+		Optical setup with drawn beampath %todo \cite{unterlagen}
+	}\label{fig:aufbau_banzer}
 \end{figure}
 
-Mit der Kugellinsengleichung lässt sich die Brennweite der Linse des van
-Leeuwenhoek-Mikroskops berechnen. Die Kugellinsengleichung lautet:
 
-\begin{equation}
-	f_{eff}= \frac{nd}{4(n-1)}
-	\label{eq:effektive_fokuslange}
-\end{equation}
 
-Dabei ist $f$ die Brennweite der Linse, $n$ der Brechungsindex des Materials,
-aus dem die Linse besteht, und $d$ der Durchmesser der Kugellinse.
+\section{Materials}\label{sec:geraeteliste}
 
-Um die Vergrößerung des van Leeuwenhoek-Mikroskops zu berechnen, muss man die
-Bezugssehweite des Auges des Beobachters (\SI{250}{\mm}) kennen. Die
-Vergrößerung wird dann nach folgender Formel berechnet:
+For the setup the following parts in \autoref{tab:gerate} are used.
 
-\begin{equation}
-	M = \frac{f_\text{Bezugssehweite}}{f}= \frac{\SI{250}{\mm}}{f}
-	\label{eq:LeeuwenhoekVergroeserung}
-\end{equation}
-
-wobei $f$ die effektive Brennweite der Kugellinse und $f_\text{Bezugssehweite}$
-die typische Bezugssehweite des Menschen (\SI{250}{\mm})
-% ist.~\cite{kuchling_taschenbuch_2014}
-
-\subsection{Hellfeld-Transmissionsmikroskop}
-Die Hellfeld-Transmissionsmikroskopie ist eine Technik zur Beobachtung der
-Struktur von transparenten oder durchscheinenden Proben wie Zellen oder dünnen
-Gewebeschnitten. Dazu wird ein Lichtstrahl durch die Probe und dann durch eine
-Reihe von Linsen geleitet, die das Licht vergrößern und fokussieren, um ein
-Bild zu erzeugen.
-
-Ein einfaches Hellfeld-Transmissionsmikroskop kann mit zwei Linsen gebaut
-werden, einer Objektivlinse und einer Okularlinse. Die Objektivlinse befindet
-sich am nächsten zur Probe und ist für die Sammlung und Vergrößerung des durch
-sie einfallenden Lichts verantwortlich. Die Okularlinse befindet sich näher am
-Auge des Betrachters und dient dazu, das von der Objektivlinse erzeugte Bild
-weiter zu vergrößern.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =\textwidth]{./figures/skizze_hellfeldmikroskop.JPG}
-	\end{center}
-	\caption[Skizze des Strahlengangs durch ein Hellfeld-Transmissionsmikroskop] { Skizze
-		des Strahlengangs durch ein Hellfeld-Transmissionsmikroskop \\
-		% \cite{banzer_advanced_2022}                   \\
-		$G$ \dots Gegenstand                                        \\
-		$B_{ZB}$ \dots Zwischenbild                                 \\
-		$f_{OBJ}$ \dots Brennweite der Objektiv-Linse               \\
-		$f_{OK}$ \dots Brennweite der Okular-Linse
-	}\label{fig:strahlengang_hellfeldmikroskop}
-\end{figure}
-
-Der Strahlengang eines Mikroskops sieht folgendermaßen aus:
-
-\begin{enumerate}
-	\item Die Lichtquelle erzeugt einen Lichtstrahl, der durch eine Kondensorlinse fällt,
-	      die das Licht auf die Probe fokussiert.
-	\item Das Licht durchdringt die Probe, die je nach ihren Eigenschaften einen Teil des
-	      Lichts absorbieren oder streuen kann.
-	\item Die Objektivlinse sammelt das Licht, das durch die Probe fällt, und erzeugt ein
-	      vergrößertes Bild der Probe.
-	\item Die Okularlinse vergrößert das von der Objektivlinse erzeugte Bild weiter und
-	      projiziert es auf das Auge des Betrachters.
-	\item Der Beobachter sieht ein vergrößertes und fokussiertes Bild der Probe.
-\end{enumerate}
-
-Um das Auflösevermögen des Mikroskops zu bestimmen, wird eine spezielle Probe
-verwendet. Auf dieser Probe befinden sich verschiedene Balkenanordnungen, die
-in Gruppen jeweils vertikal und horizontal angeordnet sind. Jeder dieser
-Gruppen ist eine Nummer zugeordnet. Aufgrund der Anordnung dieser Balken und
-der entsprechenden Nummer kann das Auflösevermögen nach folgender Formel
-% bestimmt werden~\cite{banzer_advanced_2022}:
-
-\begin{equation}
-	\text{Balkenpaare} / \text{mm} = 2^{\text{Gruppe} + \frac{\text{Element}-1}{6}}
-	\label{eq:auflosungsvermogen}
-\end{equation}
-
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-Die Dunkelfeld-Mikroskopie ist eine Technik zur Untersuchung von Proben, die
-entweder sehr klein oder sehr dünn sind und keinen ausreichenden Kontrast für
-die Hellfeldmikroskopie bieten. Bei dieser Technik wird eine ringförmige Blende
-verwendet, die das direkt übertragene Licht blockiert. So gelangt nur das
-Streulicht in den Aufbau. So entsteht ein helles Bild des Objekts vor einem
-dunklen Hintergrund, daher der Name "Dunkelfeld".
-
-Um ein Dunkelfeldmikroskop mit zwei Objektiven zu erstellen, wird ein
-spezielles Kondensorobjektiv zum Aufbau eines Hellfeldmikroskops hinzugefügt.
-Das Kondensorobjektiv ist mit einer lichtundurchlässigen Scheibe mit einer
-kleinen Öffnung in der Mitte ausgestattet, die direktes Licht blockiert und nur
-Streulicht durchlässt.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =\textwidth]{./figures/skizze_dunkelfeldmikroskop.JPG}
-	\end{center}
-	\caption[Vergleich zwischen Hellfeld- (links) und Dunkelfeld-Methode (rechts)] {
-		Vergleich zwischen Hellfeld- (links) und Dunkelfeld-Methode (rechts)
-		% \cite{banzer_advanced_2022}
-	}\label{fig:strahlengang_dunkelfeldmikroskop}
-\end{figure}
-
-Der Strahlengang des Mikroskops sieht folgendermaßen aus:
-
-\begin{enumerate}
-	\item Eine Lichtquelle erzeugt einen Lichtstrahl, der durch den Dunkelfeldkondensor
-	      auf die Probe fokussiert wird.
-	\item Die Probe streut das Licht, und nur das gestreute Licht gelangt durch die
-	      ringförmige Blende der Kondensorlinse.
-	\item Das gestreute Licht wird von der Objektivlinse aufgefangen und bildet ein
-	      helles Bild der Probe vor einem dunklen Hintergrund.
-	\item Das Bild wird durch die Okularlinse weiter vergrößert und kann vom Beobachter
-	      betrachtet werden.
-\end{enumerate}
-
-Der dunkle Hintergrund im Bild entsteht durch das Fehlen von direktem Licht,
-das durch die ringförmige Blende des Kondensors blockiert worden wäre. Aufgrund
-der Abhängigkeit vom Brechungsindex und Streueigenschaften können kleine,
-transparente oder durchscheinende Proben wie Bakterien oder kleine Partikel
-sichtbar gemacht werden, die mit anderen Mikroskopietechniken nur schwer zu
-erkennen wären, oder erst speziell eingefärbt werden
-% müssten.~\cite{banzer_advanced_2022}
-
-\section{Versuchsanordnung}\label{sec:versuchsanordnung}
-
-\subsection{Abbildung durch eine Sammellinse}
-
-Zunächst wird die Brennweite der Linse mit dem Lupeneffekt abgeschätzt. Dazu
-wird diese in der Hand gehalten, um ein Bild abzubilden. Das genauere Vorgehen
-wird in \autoref{sec:versuchsdurchfuehrung_messergebnisse} erläutert.
-
-Der Aufbau für den restlichen Versuch ist in \autoref{fig:aufbau_linse}
-sichtbar. Um die Bildweite bequem messen und das Bild entsprechend scharf
-stellen zu können, wird nach Rücksprache mit dem Betreuer ein Schirm aus
-Komponenten aus dem Lagerbestand und einem Stück Papier gebaut, wie in
-\autoref{fig:aufbau_linse} sichtbar. Um den Gegenstand abbilden zu können, wird
-dieser mit einer Halogenlampe ausgeleuchtet.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/aufbau_linse.JPG}
-	\end{center}
-	\caption[Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse] {
-		Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse \\
-		1 \dots Linse, deren Brennpunkt zu bestimmen ist               \\
-		2 \dots Schirm                                                 \\
-		3 \dots Halterung mit betrachteten Gegenstand
-	}\label{fig:aufbau_linse}
-\end{figure}
-
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
-
-Das 1-Linsen-Mikroskop nach van Leeuwenhoek wird zunächst aus den Teilen,
-sichtbar in \autoref{fig:mikroskop_bauteile}, zusammengebaut. Zunächst werden
-die Kugellinsen in die entsprechenden Vertiefungen des Plastiksteifens
-gesteckt. Nun wird dieser mithilfe der Schraube und Mutter an der Grundplatte
-befestigt. In diese wird in die entsprechende Versenkung eine Knopfbatterie und
-darunter ein Fuß der LED geklemmt. Der zweite Fuß wird so verbogen, dass er
-sich über der zweiten Seite der Batterie befindet, diese aber nicht berührt.
-Nun wird eine der beiden Büroklammern leicht aufgebogen, durch das Loch in der
-Grundplatte gefädelt und über den Kontakt der LED geführt, dass das Berühren
-dieser wie ein Schalter für die LED funktioniert. Die zweite Büroklammer wird
-durch das Loch auf der anderen Seite der Grundplatte gefädelt. Diese dient
-dazu, die andere Büroklammer nach unten zu spannen, wenn eine Dauerbeleuchtung
-gewünscht ist. Das fertige Modell ist in \autoref{fig:mikroskop_fertig}
-sichtbar.
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{.30\linewidth}
-		% \includegraphics[width=\textwidth]{./figures/mikroskop_bauteile.JPG}
-		\caption{Verwendete Bauteile
-		}\label{fig:mikroskop_bauteile}%\cite{banzer_advanced_2022}
-	\end{subfigure}
-	\begin{subfigure}{.50\linewidth}
-		% \includegraphics[width=\textwidth]{./figures/mikroskop.png}
-		\caption{Fertiges Modell
-		}\label{fig:mikroskop_fertig}
-	\end{subfigure}
-	\caption[1-Linsen-Mikroskop nach van Leeuwenhoek] {1-Linsen-Mikroskop nach van
-		Leeuwenhoek
-	}\label{fig:leeuwenhoek_mikroskop}
-\end{figure}
-
-\newpage
-\subsection{Hellfeld-Transmissionsmikroskop}
-
-Der Versuchsaufbau für das Hellfeld-Transmissionsmikroskop ist in
-\autoref{fig:aufbau_hellmikroskopie} ersichtlich. Es sind folgende Schritte
-durchzuführen. Die Nummer des Schritts entspricht dabei der Nummer des Bauteils
-in \autoref{fig:aufbau_hellmikroskopie}.
-
-\begin{enumerate}
-	\item Zunächst wird die Halogenlampe auf der Aufbauschiene befestigt und über das
-	      entsprechende Kabel eine Stromversorgung hergestellt.
-	\item Nun wird sichergestellt, dass diffuses Licht in den Aufbau gelangt, indem der
-	      Diffusor eingebaut wird. Dieser besteht grundsätzlich aus 2 kreuzweise
-	      angeordneten Klebebandstreifen.
-	\item Hier wird der Probenhalter befestigt in dem die Glasprobe mithilfe von 2
-	      Madenschrauben befestigt wird. Hierbei ist besondere Vorsicht geboten, um den
-	      Körper nicht zu beschädigen. Die genaue Position, die vom Aufbau durchstrahlt
-	      wird, kann mithilfe der Justierungs-Schrauben verändert werden.
-	\item Hinter dem Gegenstand wird nun die Obektiv-Linse mit einer Brennweite von
-	      \SI{35}{\milli\meter} plaziert.
-	\item Nun wird die Okular-Linse mit einer Brennweite von \SI{50}{\milli\meter} so in
-	      den Aufbau gegeben, dass sich der Brennpunkt dieser dort befindet, wo zuvor das
-	      Bild war. Dadurch wird sichergestellt, dass der Strahlengang dahinter parallel
-	      verläuft und quasi im Unendlichen fokusiert ist, was für eine Abbildung der
-	      Kamera notwendig ist.
-	\item Am anderen Ende der Schiene wird nun die Kamera positioniert. Vor dieser
-	      befindet sich auch eine Linse, um das Bild auf die Kamera abbilden zu können.
-\end{enumerate}
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =\textwidth]{./figures/aufbau_hellmikroskopie.jpg}
-	\end{center}
-	\caption[Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse] {
-		Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse        \\
-		1 \dots Halogenlampe mit IR-Filter                                    \\
-		2 \dots Diffusor                                                      \\
-		3 \dots Halterung mit betrachteten Gegenstand                         \\
-		4 \dots Objektiv-Linse mit einer Brennweite von \SI{35}{\milli\meter} \\
-		5 \dots Okular-Linse mit einer Brennweite von \SI{50}{\milli\meter}   \\
-		6 \dots Kamera mit einer Linse mit einer Brennweite von \SI{150}{\milli\meter}
-	}\label{fig:aufbau_hellmikroskopie}
-\end{figure}
-
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-
-Der Versuchsaufbau für das ein einfaches Dunkelfeld-Mikroskops ist in
-\autoref{fig:aufbau_dunkelfeldmikroskopie} ersichtlich. Es sind folgende
-Schritte durchzuführen. Die Nummer des Schritts entspricht dabei der Nummer des
-Bauteils in \autoref{fig:aufbau_dunkelfeldmikroskopie}. Bei diesen Versuch ist
-es besonders wichtig darauf zu achten, dass die Höhen der einzelnen Komponenten
-auf einer Ebene ausgerichtet sind.
-
-\begin{enumerate}
-	\item Zunächst wird die Halogenlampe auf der Aufbauschiene befestigt und über das
-	      entsprechende Kabel eine Stromversorgung hergestellt.
-	\item Hinter die Lichtquelle wird das Nikon-Objektiv eingesetzt, um für eine
-	      Beleuchtung der Probe zu sorgen. In diese ist bereits eine Ringblende
-	      integriert, um nur Randstrahlen durchzulassen. Die korrekte Ausrichtung dieser
-	      kann überprüft werden, indem der Ring dahinter mit einem Stück Papier
-	      betrachtet wird. Dieser sollte gleichmäßig ausgeleuchtet erscheinen.
-	\item Hinter dem Objektiv wird nun der Probenhalter mit der eingeschraubten Glasprobe
-	      Befestigt. Der Abstand zwischen Objektiv und Probe sollte hierbei
-	      \SI{6.2}{\milli\meter} betragen.
-	\item Hier wird eine Kombination aus achromatischer Linse und Blende in den
-	      Strahlengang gegeben. Die Blende dient dazu die Beleuchtung auszublenden,
-	      sodass nur die Dunkelfeld-Strahlen erfasst werden. Die genaue Position der
-	      Linse muss im fertigen Aufbau variiert werden, bis ein Dunkelfeldbild entsteht.
-	\item Um ein Bild aufnehmen zu können, wird die Kamera in den Aufbau gegeben. Diese
-	      wird ohne eine zusätzliche Linse betrieben.
-	\item Im finalen Aufbau müssen die Positionen der Kamera und der Linse verändert
-	      werden, bis ein Dunkelfeld Bild entsteht. Für die Distanz zwischen Kamera und
-	      Linse hat sich genau der Abstand von 3 Sockeln als ideal erwiesen, um ein
-	      scharfes Bild erzeugen zu können. Aus diesem Grund wurden die Sockel auf die
-	      Schiene gegeben und im weiteren Verlauf immer das gesamte System aus Linse,
-	      Sockel und Kamera verschoben.
-\end{enumerate}
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/aufbau_dunkelfeldmikroskopie.jpg}
-	\end{center}
-	\caption[Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse] {
-		Versuchsaufbau zur Bestimmung der Brennweite einer Sammellinse \\
-		1 \dots Halogenlampe mit IR-Filter                             \\
-		2 \dots Mikroskopobjektiv mit integrierter Dunkelfeld-Blende   \\
-		3 \dots Halterung mit betrachteten Gegenstand                  \\
-		4 \dots achromatische Linse mit einer Brennweite von \SI{25}{\milli\meter} mit
-		verstellbarer Blende                                           \\
-		5 \dots Kamera ohne Linse                                      \\
-		6 \dots verwendete Sockel, um die Distanz zu fixieren
-	}\label{fig:aufbau_dunkelfeldmikroskopie}
-\end{figure}
-
-\section{Geräteliste}\label{sec:geraeteliste}
-
-\subsection{Abbildung durch eine Sammellinse}
-
-Für die Abbildung durch eine Sammellinse werden die in
-\autoref{tab:gerate_linse} aufgelisteten Geräte verwendet.
+%todo
 
 \begin{table}[H]
 	\begin{center}
@@ -485,411 +113,28 @@ Für die Abbildung durch eine Sammellinse werden die in
 			Aluminium-Schiene                &                     &              &                    \\
 			Schirm                           &                     &              & selbst gebaut      \\
 			Schibelehre                      & Workzone            & 819547       & digital            \\
-		\end{tblr}\label{tab:gerate_linse}
+		\end{tblr}\label{tab:gerate}
 	\end{center}
 \end{table}
 
-\newpage
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
 
-Für den Aufbau des 1-Linsen-Mikroskop nach van Leeuwenhoek werden die in
-\autoref{tab:gerate_leeuenhoek} aufgelisteten Teile benötigt.
 
-\begin{table}[H]
-	\begin{center}
-		\caption{Verwendete Geräte für den Zusammenbau des 1-Linsen-Mikroskop nach van Leeuwenhoek
-		}
-		\begin{tblr}{cells={font=\footnotesize},colspec={lllll}}
-			\textbf{Bauteil}     & \textbf{Anmerkung}                  \\
-			Glaskugel            & Durchmesser \SI{2.5}{\milli\meter}  \\
-			Glaskugel            & Durchmesser \SI{6.35}{\milli\meter} \\
-			Halterung für Linsen & 3D-gedruckt                         \\
-			LED                  & weiß                                \\
-			Knopfbatterie        & CR2032                              \\
-			Büroklammern         & 2x                                  \\
-			Trägerplatte         & 3D-gedruckt                         \\
-			Schraube             &                                     \\
-			Mutter               &
-		\end{tblr}\label{tab:gerate_leeuenhoek}
-	\end{center}
-\end{table}
+\section{Implementation and Measurement}\label{sec:versuchsdurchfuehrung_messergebnisse}
 
-\newpage
-\subsection{Hellfeld-Transmissionsmikroskop}
+\subsection{Microscope}
 
-Für den Aufbau des Hellfeld-Transmissionsmikroskops werden die in
-\autoref{tab:gerate_hellfeldmikroskop} aufgelisteten Geräte verwendet.
+\subsection{Lasergun}
 
-\begin{table}[H]
-	\begin{center}
-		\caption{Verwendete Geräte für das Hellfeld-Transmissionsmikroskop
-		}
-		\begin{tblr}{cells={font=\footnotesize},colspec={lllll}}
-			\textbf{Gerätetyp}               & \textbf{Hersteller} & \textbf{Typ} & \textbf{Anmerkung}         \\
-			Halogenlampe                     & ThorLabs            & QTH10/M      & mit IR-Filter              \\
-			Diffusor auf Slip Ring           & ThorLabs            & SM1RC/M      &                            \\
-			Mount for Rectangular Optics     & ThorLabs            & XYF1/M       &                            \\
-			Resolution and Distortion Target & ThorLab             & R1L3S5P      &                            \\
-			Objektiv-Linse                   &                     &              & F = \SI{35}{\milli\meter}  \\
-			Lens Mount                       & ThorLabs            & LMR1/M       &                            \\
-			Okular-Linse                     & ThorLabs            & SM1V10       & F = \SI{50}{\milli\meter}  \\
-			Lens Mount                       & ThorLabs            & SM1RC/M      &                            \\
-			Blende                           & ThorLabs            & SM2D25       &                            \\
-			Kamera                           & ThorLabs            & CS165MU/M    &                            \\
-			Kamera-Linse                     &                     &              & F = \SI{150}{\milli\meter} \\
-			Optical Posts                    & ThorLabs            & TR3          & 5x                         \\
-			Rail Carrier                     & ThorLabs            & XT34TR1/M    & 6x                         \\
-			Aluminium-Schiene                &                     &              &                            \\
-			Schibelehre                      & Workzone            & 819547       & digital                    \\
-			Computersoftware                 & ThorLabs            & ThorCam      &
-		\end{tblr}\label{tab:gerate_hellfeldmikroskop}
-	\end{center}
-\end{table}
 
-\newpage
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
+\subsection{Trapping with laser}
 
-Für den Aufbau des einfachen Dunkelfeld-Mikroskops werden die in
-\autoref{tab:gerate_dunkelfeldmikroskop} aufgelisteten Geräte verwendet.
 
-\begin{table}[H]
-	\begin{center}
-		\caption{Verwendete Geräte für das einfachen Dunkelfeld-Mikroskop
-		}
-		\begin{tblr}{cells={font=\footnotesize},colspec={lllll}}
-			\textbf{Gerätetyp}               & \textbf{Hersteller} & \textbf{Typ} & \textbf{Anmerkung}        \\
-			Halogenlampe                     & ThorLabs            & QTH10/M      & mit IR-Filter             \\
-			Mikroskopobjektiv                & Nikon               & MRP40102     & mit Dunkelfeldblende      \\
-			Mount for Rectangular Optics     & ThorLabs            & XYF1/M       &                           \\
-			Resolution and Distortion Target & ThorLab             & R1L3S5P      &                           \\
-			Achomatische Linse               &                     &              & F = \SI{25}{\milli\meter} \\
-			Blende                           & ThorLabs            & SM1D12C      &                           \\
-			Lens Mount                       & ThorLabs            & SM1RC/M      &                           \\
-			Kamera                           & ThorLabs            & CS165MU/M    &                           \\
-			Optical Posts                    & ThorLabs            & TR3          & 4x                        \\
-			Rail Carrier                     & ThorLabs            & XT34TR1/M    & 8x                        \\
-			Aluminium-Schiene                &                     &              &                           \\
-			Schibelehre                      & Workzone            & 819547       & digital                   \\
-			Computersoftware                 & ThorLabs            & ThorCam      &
-		\end{tblr}\label{tab:gerate_dunkelfeldmikroskop}
-	\end{center}
-\end{table}
+\subsection{Trapping of living organisms}
 
-\section{Versuchsdurchführung und Messergebnisse}\label{sec:versuchsdurchfuehrung_messergebnisse}
 
-\subsection{Abbildung durch eine Sammellinse}
+\subsection{Transfer of angular momentum}
 
-\subsubsection{Lupeneffekt}
 
-Um die Brennweite durch den Lupeneffekt zu bestimmen, wird die Linse vor den
-Schirm gehalten und die Distanz so lange variiert, bis am Schirm ein scharfes
-Bild entsteht. Als Schirm wird dabei ein Kasten gewählt, um die Schiebelehre
-anlegen zu können und so die Distanz genau bestimmen zu können. Als Bild wurde
-dabei die blaue Plane am Dach des Nebengebäudes gewählt, weil dies einem
-unendlich weit entfernten Bild am ehesten entspricht. Die blaue Plane wurde
-dabei deshalb gewählt, weil diese aufgrund ihrer Farbe leicht identifiziert
-werden konnte und so problemlos scharf gestellt werden konnte. Die
-entsprechende Durchführung ist dabei in \autoref{fig:lupeneffekt} ersichtlich.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/lupeneffekt.JPG}
-	\end{center}
-	\caption[Abbildung auf Schirm durch die Linse] { Abbildung auf Schirm durch die Linse
-	}\label{fig:lupeneffekt}
-\end{figure}
-
-Durch den Aufbau entspricht nun die Bildweite $b'$ dem Abstand des Brennpunkts.
-Dieser wird mithilfe der Schiebelehre bestimmt, was folgenden Wert liefert:
-
-\begin{equation*}
-	b' = \SI{24(3)}{\mm}
-\end{equation*}
-
-Die Unsicherheit wurde dabei entsprechend groß gewählt, da sich die Distanz aus
-der subjektiven Wahrnehmung der Schärfe ergibt.
-
-Von der so bestimmten Distanz muss noch die halbe Dicke der Linse hinzugefügt
-werden, die im konkreten Fall $d_\text{Lupe} =\SI{13(5)}{\mm}$ entspricht.
-
-\subsubsection{Abbildungsgleichung}
-
-Um die Brennweite der Linse mithilfe der Abbildungsgleichung zu bestimmen, wird
-der Versuch zunächst nach \autoref{fig:aufbau_linse} aufgebaut. Die Position
-des Schirms muss dabei so lange variiert werden, bis eine scharfe Abbildung des
-Gegenstands entsteht. Nun werden die Distanzen für die Gegenstands und
-Bildweite mithilfe der Schiebelehre bestimmt. Dies wird für 2 verschiedene
-Distanzen durchgeführt. Die erhaltenen Ergebnisse sind dabei in
-\autoref{tab:werte_linsen} aufgelistet.
-
-\begin{table}[H]
-	\caption[Gemessene Bild und Gegenstandsweiten zur Bestimmung mithilfe der
-		Abbildungsgleichung] {Gemessene Bild und Gegenstandsweiten zur Bestimmung
-		mithilfe der Abbildungsgleichung          \\
-		$b$ \dots gemessene Bildweite in \si{\mm} \\
-		$g$ \dots gemessene Bildweite in \si{\mm}
-	}
-	\label{tab:werte_linsen}
-	\centering
-	\begin{tblr}{SS}
-		{{{$b$ / \si{\mm}}}} & {{{$g$ / \si{\mm}}}} \\
-		49(2)                & 44.4(5)              \\
-		68(2)                & 32.3(5)              \\
-	\end{tblr}
-\end{table}
-
-Zudem wurde die Sockeldicke gemessen
-$d_\text{Sockel}=\SI{15.37(2)}{\milli\meter}$ gemessen.
-
-\subsubsection{Bessel-Verfahren}
-
-Um die Brennweite anhand des Bessel-Verfahrens zu bestimmen, wird der gleiche
-Versuchsaufbau wie für die Abbildungsgleichung verwendet. Der Unterschied hier
-ist, dass die Positionen des Schirms und des Gegenstands nicht verändert
-werden. Es wird nur die Linse verschoben, um die beiden Positionen zu finden,
-an denen das Bild als scharf erscheint. Die abgemessenen Werte sind in
-\autoref{tab:werte_bessel} sichtbar. Die gesamte Länge wird dabei ebenfalls
-gemessen, was einen Wert von $l=\SI{116.29(2)}{\mm}$ liefert.
-
-\begin{table}[H]
-	\centering
-	\caption[Gemessene Bild und Gegenstandsweiten zur Bestimmung mithilfe des
-		Besselverfahrens]{ Gemessene Bild und Gegenstandsweiten zur Bestimmung mithilfe
-		des Besselverfahrens. Die Länge dazwischen beträgt dabei
-		$l=\SI{116.29(2)}{\mm}$                   \\
-		$b$ \dots gemessene Bildweite in \si{\mm} \\
-		$g$ \dots gemessene Bildweite in \si{\mm}
-	} \label{tab:werte_bessel}
-	\begin{tblr}{SS}
-		{{{$b$ / \si{\mm}}}} & {{{$g$ / \si{\mm}}}} \\
-		68(2)                & 32.3(5)              \\
-		39.72(2)             & 61.38(2)             \\
-	\end{tblr}
-\end{table}
-
-\subsubsection{Abbildungsmaßstab}
-
-Um ein Bild mit dem Abbildunggsmaßstab $A$ = 1 aufzunehmen, wird der Schirm
-durch die Kamera ausgetauscht. Um mit der Kamera ein Bild aufnehmen zu können,
-wird diese über die USB-Verbindung mit dem Computer verbunden. Auf diesem wird
-die Software ``ThorCam'' geöffnet und zunächst die Kamera verbunden. Über den
-grünen ``Play-Knopf'' kann die Übertragung des Bilds gestartet werden.
-Zusätzlich muss in den Einstellungen ``Continuous Auto-Scale'' und
-``Auto-Exposure'' ausgewählt werden. Beim Sichern der Bilder ist wichtig, dass
-diese als ``8-bit JPEG with Annotations'' gespeichert werden.
-
-Um einen Abbildungsmaßstab von 1 zu garantieren ist wichtig darauf zu achten,
-dass die Bildweite der Gegenstandsweite entspricht. Das so erzeugte Bild ist in
-\autoref{fig:abbildungsmasstab} sichtbar.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/advmicroskope/linsebrennweitenbestimmungScharf.jpg}
-	\end{center}
-	\caption[Erzeugte Abbildung für einen Abbildunggsmaßstab von 1] { Erzeugte Abbildung für
-		einen Abbildunggsmaßstab von 1
-	}\label{fig:abbildungsmasstab}
-\end{figure}
-
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
-
-Mit dem selbstgebauten 1-Linsen-Mikroskop nach van Leeuwenhoek werden nun
-verschiedene Proben betrachtet. So wird ein kleingedruckter Schriftzug
-vergrößert und die Struktur und Gravur auf einem Taschenmesser betrachtet, wie
-in \autoref{fig:van_leeuwenhoek_bild} sichtbar. Dabei ist vor allem auf eine
-geeignete Beleuchtung zu achten, da die Position des LEDs nicht ideal gewählt
-ist. Es sei angemerkt, dass es sehr schwer ist ein sauberes Bild davon
-aufzunehmen.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/mikroskop_bild.JPG}
-	\end{center}
-	\caption[Erzeugtes Bild mit 1-Linsen-Mikroskop nach van Leeuwenhoek] { Erzeugtes Bild
-		mit 1-Linsen-Mikroskop nach van Leeuwenhoek
-	}\label{fig:van_leeuwenhoek_bild}
-\end{figure}
-
-\subsection{Hellfeld-Transmissionsmikroskop}
-
-Zunächst muss das Hellfeld-Transmissionsmikroskop, wie bereits in
-\autoref{sec:versuchsanordnung} erklärt, aufgebaut werden. Wenn durch die
-Positionen der Linsen sichergestellt ist, dass das erzeugte Bild scharf ist und
-alle erforderlichen Einstellungen durchgeführt wurden, kann mit den
-eigentlichen Aufgaben begonnen werden.
-
-\subsubsection{Linsenorientierung und sphärische Aberration}
-
-Zunächst wird die Linsenorientierung umgekehrt. Dies wird erreicht, indem die
-Linse samt Halterung um 180° gedreht wird. Das bedeutet, dass nun die gekrümmte
-Seite in die Richtung der Probe weist. Durch die so erzeugte Änderung wird das
-entsprechende Bild aufgenommen, was in \autoref{fig:hell_umdrehen} sichtbar
-ist.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/advmicroskope/hellmikro-objetive180.jpg}
-	\end{center}
-	\caption[Unscharfes Bild durch das Umdrehen der Linse] { Unscharfes Bild durch das
-		Umdrehen der Linse
-	}\label{fig:hell_umdrehen}
-\end{figure}
-
-Es wird klar ersichtlich, dass das so erzeugte Bild nicht scharf erscheint.
-Dies kann durch eine Anpassung der Position der Probe korrigiert werden. Ein
-Verkleinerung der Distanz zwischen Okular und Probe sorgt dafür, dass wieder
-ein scharfes Bild entsteht.
-
-\subsubsection{Kohärenz der Beleuchtung}
-
-Um die Kohärenz der Beleuchtung zu untersuchen wird der Diffusor aus dem
-Strahlengang entfernt. Dadurch entsteht ein verschwommenes Bild, welches durch
-Anpassung der Distanzen wieder scharf gestellt werden kann. Das so erhaltene
-Bild ist in \autoref{fig:hell_koheranz} ersichtlich.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/advmicroskope/hellmikro-diffusor-scharf.jpg}
-	\end{center}
-	\caption[Scharfes Bild ohne Diffusor] { Scharfes Bild ohne Diffusor
-	}\label{fig:hell_koheranz}
-\end{figure}
-
-\subsubsection{Wellenlängenabhängigkeit und chromatische Aberration}
-
-Um die Wellenlängenabhängigkeit der Lichtquelle zu betrachten, wird die
-Halogenlampe aus dem Aufbau entfernt und durch farbige LEDs ersetzt. Es ist
-darauf zu achten, dass der Diffusor wieder im Strahlengang eingebaut sein muss.
-Die Stromversorgung der LEDs wird dabei über den USB Anschluss und den
-entsprechenden Adapter sichergestellt. Zunächst wird die blaue LED in den
-Aufbau eingebaut und das Bild scharf gestellt. Nun wird die blaue LED durch
-eine Rote ersetzt und das entstehende Bild durch Verschieben der Probe erneut
-scharf gestellt. Die entsprechende Distanz der Vergrößerung des Abstandes wird
-gemessen, was folgenden Wert liefert:
-
-\begin{equation*}
-	\SI{6.09(2)}{\mm}
-\end{equation*}
-
-\subsubsection{Gesamtvergrößerung}
-
-Um die Gesamtvergrößerung berechnen zu können, muss zunächst die
-Sockel-Sockel-Distanz und Länge der Linsen Halterung bestimmt werden. Daraus
-kann die Tubuslänge in \autoref{sec:auswertung} bestimmt werden. Die gemessenen
-Werte sind:
-
-\begin{equation*}
-	d_\text{SockelSockel}=\SI{64.03(2)}{\mm}
-\end{equation*}
-
-\begin{equation*}
-	d_\text{LensTube}=\SI{38.90(5)}{\mm}
-\end{equation*}
-
-\subsubsection{Auflösungsvermögen}
-
-Um das Auslösevermögen zu bestimmen wird der Bereich der Probe betrachtet, an
-dem sich die Balken mit den verschiedenen Gruppen und Nummerierungen befinden.
-
-Nun wird jenes Balkenpaar gesucht welches gerade noch als getrennt wahrgenommen
-werden kann. Dies ist in \autoref{fig:auflosung} ersichtlich.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/advmicroskope/hellmikro-aufloesung.jpg}
-	\end{center}
-	\caption[Abgebildete Balkenpaare, um festzustellen, welche noch als getrennt
-		wahrgenommen werden können] { Abgebildete Balkenpaare, um festzustellen, welche
-		noch als getrennt wahrgenommen werden können
-	}\label{fig:auflosung}
-\end{figure}
-
-Im konkreten Fall handelt es sich bei diesen Balken um:
-
-\begin{equation*}
-	\text{Balkenpaar} - 91
-\end{equation*}
-
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-
-Zunächst wird das Dunkelfeld-Mikroskop, wie bereits in
-\autoref{sec:versuchsanordnung} beschrieben, aufgebaut. Beim Aufbau ist
-besonders wichtig, darauf zu achten, dass sich alle Komponenten auf einer
-Optischen Achse befinden. Wie bereits erwähnt, wird der Abstand zwischen der
-achromatischen Linse und der Kamera mit nicht verwendeten Sockeln konstant
-gehalten und das gesamte Paket aus Linse und Kamera so lange verschoben, bis
-das gesuchte Dunkelfeld-Bild entsteht. Dabei ist zunächst das Hellfeld scharf
-und dann durch Vergrößern der Distanz zwischen Präparat und gesamt Paket kommt
-man in das Dunkelfeld. Die entsprechende Distanz wird dadurch bestimmt, dass im
-Hellfeld ein scharfes Bild entsteht. Dies stellt sich als die effizienteste
-Methode heraus. Durch die verstellbare Blende hinter der Linse kann nun der
-ursprüngliche Lichtstrahl ausgeblendet werden, wodurch nur noch das Streulicht
-aufgefangen wird. Ein so erzeugtes Bild ist in \autoref{fig:dunkelfeld}
-sichtbar.
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =0.5\textwidth]{./figures/advmicroskope/dunkelfeld-grosser_abstand.jpg}
-	\end{center}
-	\caption[Erzeugtes Bild mithilfe des einfachen Dunkelfeld-Mikroskops] { Erzeugtes Bild
-		mithilfe des einfachen Dunkelfeld-Mikroskops
-	}\label{fig:dunkelfeld}
-\end{figure}
-
-Hier nochmals die reproduzierbare Methodik:
-\begin{enumerate}
-	\item Fixiere Abstand zwischen Objektive und Okular und bilde eine verschiebbare
-	      Einheit mit den beiden Linsen
-	\item Finde scharfes Bild im Hellen, durch Verschieben der Einheit
-	\item Vergrößere den Abstand zwischen Präparat und Einheit
-	\item Dunkelfeld erscheint und dann Scharfstellen durch Verschieben der Einheit
-\end{enumerate}
-
-Beim Umgang mit der Computersoftware ist dabei besonders darauf zu achten, ob
-die Kameraübertragung problemlos stattfindet, da sich teilweise Probleme in
-Form eines plötzlichen Übertragungs-Stopps ergeben haben. Auch ist darauf zu
-achten, den Durchmesser der Blende nicht zu ruckartig zu ändern, da sich dabei
-teilweise Probleme bezüglich der Belichtung ergeben haben, was die Software
-kurzzeitigt ``überfordert''.
-
-\subsubsection{Dunkelfeld-Aufbau in einer Auflicht-Variante}
-
-Um den Aufbau des Dunkelfeld-Mikroskops in einer Auflicht-Variante
-durchzuführen, wurde sich folgendes Konzept, sichtbar in
-\autoref{fig:dunkelfeld_auflicht} ausgedacht. Bei der Auflicht-Variante ist
-wichtig, dass die betrachtete Probe parallel zur betrachteten Probe steht. Die
-Nummern entsprechen dabei wieder jenen in der Skizze.
-
-\begin{enumerate}
-	\item Zunächst wird ein einfallender Lichtstrahl benötigt.
-	\item Davor wird eine Blende gegeben um nur äußere Strahlen zu verwenden.
-	\item Diese Strahlenreste werden über Spiegel in Richtung Probe gelenkt.
-	\item Zur Umlenkung verwendete Spiegel
-	\item Die Lichtstrahlen werden mithilfe von Parabolspiegeln auf die Probe gebündelt.
-	\item Die betrachtete Probe befindet sich parallel zur Lichtquelle.
-	\item Auf der Probe finden Streuungen des Lichts statt.
-	\item Diese Streuungen werden mithilfe der Objektivlinse parallel gerichtet.
-	\item Der restliche Aufbau entspricht dem bekannten Strahlengang eines herkömmlichen
-	      Mikroskops.
-\end{enumerate}
-
-\begin{figure}[H]
-	\begin{center}
-		% \includegraphics[width =\textwidth]{./figures/skizze_dunkelfeld_auflicht.jpg}
-	\end{center}
-	\caption[Möglicher Dunkelfeld-Aufbau in einer Auflicht-Variante] { Möglicher
-		Dunkelfeld-Aufbau in einer Auflicht-Variante \\
-		1 \dots eingehender Lichtstrahl              \\
-		2 \dots Blende                               \\
-		3 \dots umgelekte Strahlen                   \\
-		4 \dots Spiegel                              \\
-		5 \dots Parabolspiegel                       \\
-		6 \dots Probe                                \\
-		7 \dots gestreutes Licht                     \\
-		8 \dots Objektiv-Linse                       \\
-		9 \dots ausgehender Lichtstrahl
-	}\label{fig:dunkelfeld_auflicht}
-\end{figure}
 
 \section{Auswertung}\label{sec:auswertung}
 
@@ -906,207 +151,62 @@ Daten. Dies wurde aber alles durch \verb#labtool-ex2# abstrahiert.
 Um höchstmögliche Genauigkeit zu garantieren wird erst bei der Darstellung der
 Wert in Tabellen gerundet.
 
-\subsection{Abbildung durch eine Sammellinse}
 
-\subsubsection{Lupeneffekt}
+\subsection{Microscope}
 
-Die Brennweite der Linse errechnet sich aus dem gemessenen Abstand und der
-halben Dicke der Linse. Daraus ergibt sich eine Brennweite von:
+\subsection{Lasergun}
 
-\begin{equation}
-	f = b'+ \frac{d_\text{Lupe}}{2} = \SI{31(4)}{\mm}
-\end{equation}
 
-\subsubsection{Abbildungsgleichung}
+\subsection{Trapping with laser}
 
-Um die Brennweite anhand der Abbildungsgleichung zu bestimmen, werden die
-entsprechenden Werte auf \autoref{eq:linsengleichung} angewendet. Daraus ergibt
-sich aus den die zwei Brennweiten, welche nun gemittelt werden:
 
-\begin{equation}
-	f = \frac{f_1+f_2}{2} = \SI{29.3(4)}{\mm}
-\end{equation}
+\subsection{Trapping of living organisms}
 
-\subsubsection{Bessel-Verfahren}
 
-Um die Brennweite anhand dse Bessel-Verfahrens zu bestimmen, werden die
-entsprechenden Werte auf \autoref{eq:bessel} angewendet. Dazu musste jedoch $w$
-durch die Unterschiede der Bild- und Gegenstandsweite bestimmt werden indem die
-Unterschiede betragsmäßig gemittelt wurden.
+\subsection{Transfer of angular momentum}
 
-\begin{equation}
-	w = \frac{|\Delta b|+|\Delta g|}{2} = \SI{29.0(1.1)}{\mm}
-\end{equation}
 
-Daraus ergibt sich, mittels \autoref{eq:bessel}, für die Brennweite:
 
-\begin{equation}
-	f =  \SI{29.30(0.13)}{\mm}
-\end{equation}
 
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
-Unter Verwendung von \autoref{eq:effektive_fokuslange} kann mittels dem
-Brechungsindex $n=\num{1.518}$ und dem Durchmesser der Kugellinse $d$ die
-effektive Brennweite berechnet werden. Desweitern lässt sich dann durch
-\autoref{eq:LeeuwenhoekVergroeserung} die Vergrößerung $M$
-% bestimmen.~\cite{banzer_advanced_2022}%todo \cite{}
-
-\begin{enumerate}
-	\item Brennweite $f=\SI{1.832(0.004)}{\mm}$ und Vergrößerung $M=\SI{136.5(3)}{}$ bei
-	      einem Kugellinsendurchmesser von \SI{2.5}{\mm}
-	\item Brennweite $f=\SI{4.652(3)}{\mm}$ und Vergrößerung $M=\SI{53.73(5)}{}$ bei
-	      einem Kugellinsendurchmesser von \SI{6.35}{\mm}
-\end{enumerate}
-
-\subsection{Hellfeld-Transmissionsmikroskop}
-
-\subsubsection{Gesamtvergrößerung}
-
-Zunächst wird die Distanz vom Sockel zu Sockel mit der Länge der
-Linsenhalterung addiert und die Brennweiten davon subtrahiert, damit die
-Tubuslänge $t_0$ berechnet werden kann:
-
-\begin{equation}
-	t_0 = d_\text{SockelSockel} + d_\text{LensTube} + d_\text{Sockel} - f_\text{Okular} - f_\text{Objektiv}
-\end{equation}
-
-Schlussendlich wird mittels der der Tubuslänge $t_0=\SI{33.3(1.4)}{\mm}$ die
-Gesamtvergrößerung $M$ des Mikroskops berechnen.
-
-\begin{equation}
-	M=\frac{-t_0 f_\text{Bezugssehweite}}{f_\text{Okular} f_\text{Objektiv}} = \num{-4.8(0.4)}
-\end{equation}
-
-\subsubsection{Auflösungsvermögen}
-
-Das Auflösungsvermögen kann aus der entsprechenden Gruppen und Elementnummer
-anhand \autoref{eq:auflosungsvermogen} bestimmt werden. Dies ergibt schließlich
-folgenden Wert:
-
-\begin{equation}
-	\SI{512}{\strich\per\mm}
-\end{equation}
-
-Durch Bildung des Kehrwert für ein Balkenpaar entsteht für das Mikroskop ein
-Auflösungsvermögen von $\SI{1.953}{\um}$.
-
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-
-Bezüglich der Dunkelfeld-Mikroskopie ist keine Auswertung notwendig. Ein
-Vergleich der erzeugten Bilder durch das Hellfeld-Transmissionsmikroskop mit
-dem einfachen Dunkelfeld-Mikroskop zeigt, dass die erhaltenen Bilder durch das
-einfache Dunkelfeld- von der Belichtung her genau umgekehrt sind.%(\autoref)%(\autoref{label})
 
 \section{Diskussion}\label{sec:diskussion}
 
-\subsection{Abbildung durch eine Sammellinse}
+\subsection{Microscope}
 
-Alle drei Varianten liefern, wenn alle Distanzen berücksichtigt werden, eine
-Brennweite von in etwa \SI{29}{\mm}. Was ein Indiz dafür ist, dass die
-tatsächliche Brennweite wirklich diesem Wert entspricht.
+\subsection{Lasergun}
 
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
 
-%Ab welchem Brechungsindex liegt der Fokuspunkt nicht mehr außerhalb der Kugellinse?
+\subsection{Trapping with laser}
 
-Der Vorteil des 1-Linsen-Mikroskop nach van Leeuwenhoek liegt darin, dass nur 1
-Linse verwendet werden muss. Aufgrund des Aufbaus wird der Strahlengang auch
-nicht durch die Appertur sondern durch das Auge begrenzt. Ein weiterer Vorteil
-ist, dass sich der Herstellung einer Kugellinse, vor allem in historischer
-Sicht, als einfacher erweist als die einer herkömmlichen Sammellinse. Es ist
-auch sehr beeindruckend, dass sich durch diesen recht simplen Aufbau bereits
-eine Vergrößerung von über 100 realisieren lässt. Jedoch ist die Handhabung
-eines normalen Mikroskops deutlich bequemer. Auch kann die Vergrößerung durch
-Anpassen der entsprechenden Distanzen zwischen den Linsen oder Verwendung
-anderer Brennweiten nochmals deutlich vergrößert werden. Auch ist der
-Abbildungsfehler, hervorgerufen durch die sphärische Abberation, bei der
-Kugellinse deutlich größer, was auch ein Betrachten von
-\autoref{fig:van_leeuwenhoek_bild} zeigt.
 
-\subsection{Hellfeld-Transmissionsmikroskop}
+\subsection{Trapping of living organisms}
 
-Aufgrund des Schlechten Aufbaus ist nur eine Vergrößerung von circa \num{5}
-geschafft worden, und das Auflösungsvermögen des Mikroskop ist im Vergleich zu
-Objektiven anderer Mikroskope schlecht. Rechnet man das Auflösungsvermögen
-\SI{1.953}{\um} auf eine Numerische Aperture um erhält man eine $N.A. =
-	\SI{0.14}{}$.
 
-Ein Verbesserungsvorschlag hierzu wäre, eine bessere Anpassung der verwendeten
-Linsen. So könnte durch die Verwendung von anderen Linsen, deren Brennpunkte
-besser auf die entsprechenden Distanzen abgestimmt sind, eine deutlich bessere
-Vergrößerung erreicht werden.
+\subsection{Transfer of angular momentum}
 
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
 
-Beim Betrachten des erzeugten Dunkelfeld-Bildes in \autoref{fig:dunkelfeld}
-wird deutlich sichtbar, dass vor Allem leichte Verunreinigungen gut sichtbar
-gemacht werden, was mit der Theorie der Dunkelfeldmikroskopie übereinstimmt. Es
-wird auch sichtbar, dass ein Tausch bezüglich der hellen und dunklen Bereiche
-im Vergleich zur Hellfeldmikroskipie stattgefunden hat. Dies deckt sich
-ebenfalls mit den Erwartungen. Es ist auch zu erwähnen, dass Präzision
-gefordert ist, um ein Dunkelfeld-Bild zu erzeugen, damit wirklich alle Bereiche
-des Lichts ausgeblendet werden, das Streulicht aber durch die Kamera scharf
-abgebildet wird.
+
+
+
 
 \section{Zusammenfassung}\label{sec:zusammenfassung}
 
-Hier werden nochmals alle Ergebnisse dieser Experimentenfolge aufgelistet.
-%Wobei die meisten zu erstellenden Diagramme Aufgrund der Länge der
-%\autoref{sec:auswertung} entnommen werden sollen.
+\subsection{Microscope}
 
-\subsection{Abbildung durch eine Sammellinse}
+\subsection{Lasergun}
 
-Hier ist die, in diesem Experiment durch verschiedene Methoden ermittelte,
-Brennweite der, zu untersuchenden, Sammellinse nochmals angeführt:
 
-\begin{enumerate}
-	\item Lupeneffekt: $f = \SI{31(4)}{\mm} $
-	\item Abbildungsgleichung: $f = \SI{29.3(4)}{\mm} $
-	\item Bessel-Verfahren: $f = \SI{29.30(0.13)}{\mm} $
-\end{enumerate}
+\subsection{Trapping with laser}
 
-\subsection{Das 1-Linsen-Mikroskop nach van Leeuwenhoek}
 
-Hier sind die, in diesem Experiment ermittelte, Brennweite und Vergrößerung
-dem, von uns gebauten, van Leeuwenhoek-Mikroskops nochmals angeführt:
+\subsection{Trapping of living organisms}
 
-\begin{enumerate}
-	\item Brennweite $f=\SI{1.832(0.004)}{\mm}$ und Vergrößerung $M=\SI{136.5(3)}{}$ bei
-	      einem Kugellinsendurchmesser von \SI{2.5}{\mm}
-	\item Brennweite $f=\SI{4.652(3)}{\mm}$ und Vergrößerung $M=\SI{53.73(5)}{}$ bei
-	      einem Kugellinsendurchmesser von \SI{6.35}{\mm}
-\end{enumerate}
 
-\subsection{Hellfeld-Transmissionsmikroskop}
+\subsection{Transfer of angular momentum}
 
-Bei der Drehung der Linse wird klar ersichtlich, dass sich dadurch die
-Brennweite verändert und daher die Distanzen neu angepasste werden müssen, um
-ein scharfes Bild zu erzeugen.
 
-Auch wird durch das entfernen des Diffusors gut ersichtlich, dass sich dieser
-ebenfalls auf den entsprechenden Strahlengang auswirkt.
 
-Durch die Verwendung der Verschiedenfarbigen LEDs wird der Abbildungsfehler der
-chromatischen Abberation klar ersichtlich. Dies bedeutet, dass der Brennpunkt
-von der Wellenlänge des betrachteten Lichtstrahls abhängig ist. Im konkreten
-Fall bedeutet dies, dass das kurzwelligere, blaue Licht einer anderen
-Brennweite entspricht, als das langwelligere Rote.
 
-Die berechneten Werte für die Vergrößerung und das Auflösungsvermögen sind im
-Folgenden aufgelistet.
-
-\begin{enumerate}
-	\item Gesamtvergrößerung des Mikroskops: $M = \num{-4.8(0.4)}$
-	\item Scharfe Balkenpaare per Millimeter: \SI{512}{\strich\per\mm}
-	\item Auflösungsvermögen des Mikroskops bei weißem Licht: $d = \num{1.953}$
-\end{enumerate}
-
-\subsection{Aufbau eines einfachen Dunkelfeld-Mikroskops}
-
-Die Verwendung des Dunkelfeld-Mikroskops zeigt eine Invertierung der
-Helligkeiten. Dies bedeutet, dass die beim Hellfeldmikroskops
-``Licht-blockierenden'' Stoffe, die dunkel erscheinen, nun im Dunkelfeld Hell
-wirken. Dies lässt sich durch die Streueigenschaften dieser Stoffe erklären.
 
 \newpage
 \printbibliography
