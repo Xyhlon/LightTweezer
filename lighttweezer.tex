@@ -121,12 +121,109 @@ For the setup the following parts in \autoref{tab:gerate} are used.
 
 \section{Implementation and Measurement}\label{sec:versuchsdurchfuehrung_messergebnisse}
 
-\subsection{Microscope}
+\subsection{Microscope}\label{seq:durchfurung_microscope}
 
+For this part only the microscope module form \autoref{fig:aufbau} is needed.
+
+As a sample the Silicas are used. The object holder has a thin placeholder on it, so that the tiny particles 
+in the liquid are allowed to move, as visible in \autoref{fig:object_holder}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width =0.5\textwidth]{./figures/Objekt_holde.png}
+	\end{center}
+	\caption[Object holder with placeholder] {
+		Object holder with placeholder
+	}\label{fig:object_holder}
+\end{figure}
+
+The object holder is placed on the specimen stage and the camera is connected with the computer.
+The analyse of the sample is done with the "ThorCam"\  software. It is important to make sure that there is enough 
+space between the sample and the detector, to avoid a crash.
+
+Now the white light LED under the sample is switched on in order to create an image on the software. 
+It is important to keep in mind, that there is a filter between the sample and the camera to protect it later
+from the direct incident of the laser. Thats why the image appears in a greenish shine. 
+Now the sample is slowly moved upwards in z-direction to create a sharp image.
+
+If the focus is set right, one can observe the brownian motion of the small particles. Some of them stand still,
+because the are attached either to the objective holder or to the cover glass. 
+With the electric controller one can now navigate over the sample, by selecting an appropriate speed in the menu.
+
+To measure the brownian motion one needs a position on the sample where one finds at east 3 moving particles at 
+approximately the same size. Then ones records the screen for at least 2 min to make an analyse of the movement 
+of the particles. One of these spots is visible in \autoref{fig:pic_brownian_motion}, as an example.
+The same procedure is again carried out for an other spot.
+
+%todo pic
+
+It is important to keep in mind that after looking at the sample some time it starts to dry, and gives the particles 
+some kind of a drift towards the middle of the sample. This can be observed by a "dry-wall" \ that starts to move over the 
+sample, as visible in \autoref{fig:dry_wall}
+
+% todo pic dry wall
+
+trocknung
 \subsection{Lasergun}
 
+For this part of the example the laser module without the telescope is added to the setup, as visible in \autoref{fig:aufbau}.
+From now on it is very important to keep in mind the principles of laser safety and use the laser safety googles, 
+when the laser is running.
+
+When everything is attached to the setup the laser can be switched on and the power can slowly be increased.
+
+Now again the z-position of the stage needs to be increased until the focus of the laser becomes visible in the plane.
+There are in total 3 positions where the laser beam is visible which is shown in \autoref{fig:laser_focus}.
+
+%todo pic laserfocus
+
+When the laser is in focus one can try to kick some particles with the laser beam by varying its power and moving it 
+across the sample.
 
 \subsection{Trapping with laser}
+
+The aim of this experiment is to trap a particle inside the laser beam. This can be achieved by turning the laser to 
+its highest power witch is at the explicit case \SI{100}{\milli\ampere} and than bringing it close to a freely moving particle.
+The soaking of the particle can be observed. By moving the laser freely over the sample, the particle can be guided.
+By varying the power of the laser one can observe, that an explicit force is needed in order to trap the particle, depending on its size.
+
+To also increase the power of the laser beam, the telescope cage, visible in \autoref{fig:aufbau}, is included to the setup, in order to 
+increase the power of the beam.
+The interesting thing is, that the telescope had no visible effect on the trapping of the particle.
+%todo sag ma des e oder
+
+Now one particle is trapped and slowly brought to a place on the sample, where also some other particles of approximately the
+same size are freely moving, as visible in \autoref{fig:tapping} and recorded to compare the movement of the trapped particle 
+with the freely moving one.
+
+%todo trapping
+
+Now one tries to catch 2 particles at the same time. When both particles are captured by the laser beam and the focus is regulated a bit, 
+by adjusting the z-position of the sample, the particles can be stacked. In the image it looks like one particle, but when turning of the laser
+one can observe both particles drifting away, as visible in \autoref{fig:stacked}.
+
+%todo fig:stacked
+
+\subsection{Holding force}
+
+The aim of this experiment is to determine the holding force of the laser beam.
+Therefore it is important that the focus of the laser is perfectly aligned. To check this one can try to stack 2 particles, 
+as described before. When the particles can be stacked, the focus lies in the correct level.
+
+Now one tries to find the speed of the lasermovement, where the particle can follow. To determine this the speed of the 
+movement can be regulated in the menu of the controller. 
+In order to find the speed one tries a binary search, which means always try to divide the interval in 2 sections of 
+approximately the same size and so look for the speed stepwise.
+It is important to always try for the same spot in the sample, because at an other position there could be other conditions 
+and so the results can not be compared. It is also important to keep in mind the drift due to the dry of the sample, 
+as already mentioned in \autoref{seq:durchfurung_microscope}.
+This procedure is now repeated for different laser powers and for 2 different particle sizes.
+The results are visible in \autoref{tab:movement}.
+
+%todo tab movement
+
+
+\subsection{Characterization of unknown sample}
 
 
 \subsection{Trapping of living organisms}
@@ -160,6 +257,12 @@ Wert in Tabellen gerundet.
 \subsection{Trapping with laser}
 
 
+\subsection{Holding force}
+
+
+\subsection{Characterization of unknown sample}
+
+
 \subsection{Trapping of living organisms}
 
 
@@ -177,6 +280,13 @@ Wert in Tabellen gerundet.
 
 
 \subsection{Trapping with laser}
+
+
+\subsection{Holding force}
+
+
+\subsection{Characterization of unknown sample}
+
 
 
 \subsection{Trapping of living organisms}
@@ -197,6 +307,16 @@ Wert in Tabellen gerundet.
 
 
 \subsection{Trapping with laser}
+
+
+
+\subsection{Holding force}
+
+
+\subsection{Characterization of unknown sample}
+
+
+
 
 
 \subsection{Trapping of living organisms}
