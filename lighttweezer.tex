@@ -56,6 +56,115 @@ During the experiment the following steps need to be performed:
 
 % todo bitte mit ai
 
+% Brownian motion connection to viscosity then connection to slope of squared displacement
+% then connection between trap stiffness and holding force.
+\subsection{Brownian Motion and Its Relation to Diffusion}
+
+Brownian Motion is the random, erratic movement of particles suspended in a
+fluid, discovered by Robert Brown in 1827. This motion results from collisions
+with the molecules of the surrounding medium, which are in constant thermal
+motion.
+
+Diffusion Constant (D) quantifies how fast particles diffuse in a medium. It is
+influenced by the temperature of the medium, the viscosity, and the size of the
+diffusing particles.
+
+Average Squared Displacement (ASD) measures how far particles move from their
+original position, on average, over time. Mathematically, it is expressed as:
+\begin{equation}
+	\left \langle (\Delta x)^2 \right \rangle = 2 d D t
+	\label{eq:brownian_motion_diffusion}
+\end{equation}
+where $\left \langle (\Delta x)^2 \right \rangle$ is the mean squared displacement,
+$d$ is the dimensionality of motion, $D$ is the diffusion constant, and $t$ is
+time.
+
+\subsection{Fick's Law of Diffusion}
+
+Fick's Law describes the flux of particles under a concentration gradient:
+
+\paragraph{Fick's First Law:} Indicates that the particle flux $J$ is proportional to the negative of the
+concentration gradient $\nabla c$:
+\begin{equation}
+	J = -D \nabla c
+	\label{eq:ficks_first_law}
+\end{equation}
+\paragraph{Fick's Second Law:} Describes the time dependence of concentration due to diffusion:
+
+\begin{equation}
+	\frac{\partial c}{\partial t} = D \nabla^2 c
+	\label{eq:ficks_second_law}
+\end{equation}
+This law shows how the concentration changes in response to
+the diffusion spread, balancing out concentration differences over time.
+
+\subsection{Einstein Relation (Einstein-Smoluchowski Equation)}
+
+The Einstein relation connects diffusion with the microscopic random motion
+observed in Brownian motion. Einstein derived a formula linking the diffusion
+constant $D$ with temperature $T$, the Boltzmann constant $k_B$, and the
+mobility $\mu$ of the particles:
+
+\begin{equation}
+	D = \mu k_B T
+	\label{eq:einstein_relation}
+\end{equation}
+
+\subsubsection{Derivation of the Einstein Relation from Fick's Law}
+
+\paragraph{Equilibrium State:} Starting with Fick's First Law under the assumption of thermal equilibrium and
+a potential energy $U(x)=−Fx$ due to a small applied force $F$:
+
+\begin{align*}
+	c(x)          & = c_0 e^{Fx/k_BT}        \\
+	\nabla c      & = F/k_BT c(x)            \\
+	\Rightarrow J & = -D \frac{F}{k_BT} c(x)
+\end{align*}
+
+\paragraph{Mobility:} By definition, mobility μμ is the velocity per unit force. Express the flux JJ
+also as $J=\mu Fc(x)$.
+
+\paragraph{Equating Fluxes:} Equating the two expressions for $J$:
+\begin{align*}
+	\mu Fc(x) & = -D \frac{F}{k_BT} c(x)                                                  \\
+	\mu       & = -\frac{D}{k_BT}                                                         \\
+	D         & = \mu k_BT\qquad \# \text{with absorption of the sign into the definition
+		of } \mu
+\end{align*}
+
+for spherical particles in a liquid with low Reynolds number one substitute the
+mobility using the Stokes law for the frictional force:
+
+\begin{align*}
+	F_\text{Stokes}   & = 6 \pi \eta R v \\
+	\mu = \frac{F}{v} & = 6 \pi \eta R
+\end{align*}
+
+and arrive at the Stokes–Einstein–Sutherland equation.
+
+\begin{align*}
+	D = \frac{k_B T}{6 \pi \eta R}
+	\label{eq:sto_ein_sut}
+\end{align*}
+
+Lastly one can equate the Brownian motion and the diffusion constant to get
+the:
+
+\begin{align*}
+	\left \langle (\Delta x)^2 \right \rangle                                         & = 2 d \frac{k_B T}{6 \pi \eta R} t        \\
+	\text{using the differential form:}                                               &                                           \\
+	\text{d}\left \langle (\Delta x)^2 \right \rangle                                 & =  \frac{d k_B T}{3 \pi \eta R} \text{d}t \\
+	\Rightarrow \frac{\partial \left \langle (\Delta x)^2 \right \rangle}{\partial t} & =  \frac{d k_B T}{3 \pi \eta R}
+\end{align*}
+
+% gradient trapping mie regime
+
+% gradient rayleigh regime
+
+% Momentum transfer via kinetic light pulses
+
+% Angular momentum transfer via circular polarized light
+
 \section{Experimental Setup}\label{sec:versuchsanordnung}
 
 The total setup of the experiment is visible in \autoref{fig:aufbau}. Im
@@ -141,21 +250,44 @@ sample and the detector, to avoid a crash.
 Now the white light LED under the sample is switched on in order to create an
 image on the software. It is important to keep in mind, that there is a filter
 between the sample and the camera to protect it later from the direct incident
-of the laser. Thats why the image appears in a greenish shine. Now the sample
+of the laser. That's why the image appears in a greenish shine. Now the sample
 is slowly moved upwards in z-direction to create a sharp image.
 
-If the focus is set right, one can observe the brownian motion of the small
+If the focus is set right, one can observe the Brownian motion of the small
 particles. Some of them stand still, because the are attached either to the
 objective holder or to the cover glass. With the electric controller one can
 now navigate over the sample, by selecting an appropriate speed in the menu.
 
-To measure the brownian motion one needs a position on the sample where one
+To measure the Brownian motion one needs a position on the sample where one
 finds at east 3 moving particles at approximately the same size. Then ones
 records the screen for at least 2 min to make an analyse of the movement of the
-particles. One of these spots is visible in \autoref{fig:pic_brownian_motion},
-as an example. The same procedure is again carried out for an other spot.
+particles. One of these spots is visible in \autoref{fig:part_overview_1} and
+\autoref{fig:part_overview_2}, as an example. The same procedure is again
+carried out for another spot.
 
 %todo pic
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/I1_tracked.pdf}
+	\caption[Capture 1 of particles]{This figure contains the initial conditions of the
+		tracked region displayed in the background and has the trajectories of the
+		particles overlaid from cold to hot indicating the time evolution of the
+		particles. Furthermore, the particles are labeled and plotted on an x, y
+		coordinate grid. This is the first capture of particles.
+	}\label{fig:part_overview_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/I2_tracked.pdf}
+	\caption[Capture 2 of particles]{This figure contains the initial conditions of the
+		tracked region displayed in the background and has the trajectories of the
+		particles overlaid from cold to hot indicating the time evolution of the
+		particles. Furthermore, the particles are labeled and plotted on an x, y
+		coordinate grid. This is the second capture of particles.
+	}\label{fig:part_overview_2}
+\end{figure}
 
 It is important to keep in mind that after looking at the sample some time it
 starts to dry, and gives the particles some kind of a drift towards the middle
@@ -166,6 +298,9 @@ the sample, as visible in \autoref{fig:dry_wall}
 
 trocknung
 \subsection{Lasergun}
+% Discuss and explain the observed effects. 
+% What other mechanisms in light-matter interactions could be taken 
+% advantage of to induce particle motion? 
 
 For this part of the example the laser module without the telescope is added to
 the setup, as visible in \autoref{fig:aufbau}. From now on it is very important
@@ -185,6 +320,14 @@ When the laser is in focus one can try to kick some particles with the laser
 beam by varying its power and moving it across the sample.
 
 \subsection{Trapping with laser}
+% Analyse the video again with the tracking tool used above. What’s the 
+% difference in motion characteristics comparing a trapped to freely moving 
+% particles? For better comparison, calculate again the squared displacements 
+% now for the trapped particle. 
+% Explain why more than one particle can be held within a single beam, and 
+% which conditions must be fulfilled to do so. Discuss why particles are also 
+% stably trapped outside the actual focal volume (at a lateral distance larger 
+% than the beam size in the focus). 
 
 The aim of this experiment is to trap a particle inside the laser beam. This
 can be achieved by turning the laser to its highest power witch is at the
@@ -216,6 +359,18 @@ drifting away, as visible in \autoref{fig:stacked}.
 %todo fig:stacked
 
 \subsection{Holding force}
+% To calculate the maximum holding force (related to the trap stiffness), we 
+% need the following dependences, laws, and parameters: 
+% the frictional force is defined as FF = 6π ηeff R v (ηeff : effective viscosity of 
+% liquid; R : particle radius; v : velocity relative to liquid). 
+% To calculate the max. frictional force – equalling the maximum 
+% holding force – from the measured maximum velocity, we also need 
+% to know the effective viscosity.  
+% The effective viscosity influenced also the Brownian motion studied 
+% earlier. It depends on the mean squared displacement and, thus, also 
+% on the linear slope of the corresponding curves you plotted before. 
+% The slope is defined by s = (2 kB T) / (3π ηeff R) with the (room) 
+% temperature T.
 
 The aim of this experiment is to determine the holding force of the laser beam.
 Therefore it is important that the focus of the laser is perfectly aligned. To
@@ -237,6 +392,10 @@ visible in \autoref{tab:movement}.
 %todo tab movement
 
 \subsection{Characterization of unknown sample}
+% Experimentally characterizing the trapping performance in dependence on 
+% the chosen particles.  
+% Discuss and explain your findings. Compare them to the previous 
+% experiments. 
 
 For this part the sample is changed. When removing the object holder vit is
 important to go down in z-direction with the sample stage in order to do not
@@ -252,14 +411,15 @@ seems to contain particles that can absorb the laser beam, because one cam
 
 %todo foto
 
-What one can also observe with the bare eye is that the whole sample seems red
+What one can also observe with the bare eye is that the whole sample seems red,
 although there are also e few particles inside it, so the have a huge coloring
 effect.
 
 \subsection{Trapping of living organisms}
+% Discuss your findings and compare them to the previous experiments. 
 
 For this part of the experiment one needs a sample with living bacteria on it.
-Therefore a gulp of "ayran" \ gets diluted with water to make it transparent.
+Therefore, a gulp of "ayran" \ gets diluted with water to make it transparent.
 
 When everything is aligned and the laser is switched on again, one can try to
 find a bacterium. The can be easily detected due to the movement. When one
@@ -270,6 +430,10 @@ stops its movement and aligns with the laser beam, as visible in
 %todo bacterium
 
 \subsection{Transfer of angular momentum}
+% If the light changes its angular momentum during the interaction, part of 
+% this angular momentum must be exerted (partially) on the particle. Which 
+% properties a microscopic particle should exhibit for the overall angular 
+% momentum of the incoming light to change?
 
 For this part of the experiment the sample "vaterite" \ is used. To avoid
 pollution of the "ayran"\ sample this sample is placed on a new object holder.
@@ -282,6 +446,9 @@ To transfer the angular momentum of the laser one has to change its handyness.
 This is done by holding a waveplate into the telescope and rotating it while
 observing the trapped particle.
 
+% Now, trap a particle with the circularly polarized light beam, record a video, 
+% and discuss what you observe and what should you observe. 
+
 Unfortunately the rotational effect was not as strong as expected. This can be
 explained, because many parameters need to fit in order to create that effect.
 
@@ -289,44 +456,15 @@ explained, because many parameters need to fit in order to create that effect.
 
 \section{Analysis}\label{sec:auswertung}
 
-Um zu sehen wie sich die Unsicherheit der Messungen bis in die Ergebnisse
-fortpflanzt, ist erweiterte Gauss-Methode verwendet worden. Die Grundlagen
-dieser Methode stammen von den Powerpointfolien von
-% GUM~\cite{wolfgang_kessel_isobipm-gum_2004}. Für die Auswertung ist die
-Progammiersprache Python im speziellen die Pakete \verb#labtool-ex2#,
-\verb#pandas#, \verb#sympy#, \verb#lmfit# zur Hilfe genommen worden.
-\verb#lmfit# wurde für das Fitten verwendet, \verb#sympy# wurde für symbolische
-Manipulation verwendet und die restlichen Pakete für leichteres Handhaben der
-Daten. Dies wurde aber alles durch \verb#labtool-ex2# abstrahiert.
+In order to see how the uncertainty of the measurements propagates into the
+results, the extended Gauss method was used. For the analysis python was used
+in combinations with the packages \verb#scikit-learn#, \verb#numpy#,
+\verb#opencv#, \verb#scipy#,\verb#matplotlib# and \verb#uncertainties#.
 
-Um höchstmögliche Genauigkeit zu garantieren wird erst bei der Darstellung der
-Wert in Tabellen gerundet.
+In order to ensure the highest possible accuracy, the values are not rounded
+until they are displayed in tables.
 
 \subsection{Microscope}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{figures/I1_tracked.pdf}
-	\caption[Capture 1 of particles]{This figure contains the initial conditions of the
-		tracked region displayed in the background and has the trajectories of the
-		particles overlaid from cold to hot indicating the time evolution of the
-		particles. Furthermore, the particles are labeled and plotted on an x, y
-		coordinate grid. This is the first capture of
-		particles.
-	}\label{fig:part_overview_1}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{figures/I2_tracked.pdf}
-	\caption[Capture 2 of particles]{This figure contains the initial conditions of the
-		tracked region displayed in the background and has the trajectories of the
-		particles overlaid from cold to hot indicating the time evolution of the
-		particles. Furthermore, the particles are labeled and plotted on an x, y
-		coordinate grid. This is the second capture of
-		particles.
-	}\label{fig:part_overview_2}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
