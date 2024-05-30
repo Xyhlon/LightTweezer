@@ -116,12 +116,12 @@ mobility $\mu$ of the particles:
 a potential energy $U(x)=−Fx$ due to a small applied force $F$:
 
 \begin{align*}
-	c(x)          & = c_0 e^{Fx/k_BT}        \\
-	\nabla c      & = F/k_BT c(x)            \\
+	c(x)          & = c_0 e^{\frac{Fx}{k_BT}} \\
+	\nabla c      & = \frac{F}{k_BT} c(x)     \\
 	\Rightarrow J & = -D \frac{F}{k_BT} c(x)
 \end{align*}
 
-\paragraph{Mobility:} By definition, mobility μμ is the velocity per unit force. Express the flux JJ
+\paragraph{Mobility:} By definition, mobility μμ is the velocity per unit force. Express the flux $J$
 also as $J=\mu Fc(x)$.
 
 \paragraph{Equating Fluxes:} Equating the two expressions for $J$:
@@ -157,9 +157,82 @@ the:
 	\Rightarrow \frac{\partial \left \langle (\Delta x)^2 \right \rangle}{\partial t} & =  \frac{d k_B T}{3 \pi \eta R}
 \end{align*}
 
-% gradient trapping mie regime
+\subsection{Optical Trapping}
+
+Overarching principle: due to the Gaussian form of the laser beam there exists
+a stable location along the beam near the waist of the beam where particles are
+attracted to. This fixes the position of particles in the first axis. How the
+other two degrees of freedom are fixed is dependent on the particle size and
+explained below:
 
 % gradient rayleigh regime
+\subsubsection{Rayleigh Regime}
+
+In the Rayleigh regime, the particle size is much smaller than the wavelength
+of the trapping light (usually less than about one-tenth of the wavelength).
+Here, the particle can be modeled as an electric dipole induced by the electric
+field of the light.
+
+\paragraph{Gaussian Beam:}
+A Gaussian beam, typically used in optical trapping, has a highly focused,
+bell-shaped intensity profile. The electric field of such a beam varies
+spatially, being strongest at the center and decreasing towards the edges.
+
+\paragraph{Dipole Interaction and Gradient Force:}
+The particle in a Gaussian beam experiences an induced dipole moment due to the
+electric field. This dipole moment ($\vec{p} = \alpha \vec{E}$) is proportional
+to the electric field $\vec{E}$, where $\alpha$ is the particle's
+polarizability.
+
+The key force at work here is the gradient force, which arises due to
+variations in the light's electric field intensity. The force $\vec{F}$ on the
+dipole is given by:
+\begin{equation}
+	\vec{F} (\vec{p} \cdot \nabla) \vec{E}
+\end{equation}
+
+This equation shows that the dipole (the particle) is attracted towards regions
+of higher electric field intensity. In the Gaussian beam, this means the
+particle is pulled towards the beam's center, effectively trapping it at the
+focus where the intensity is maximal. This fixes the other two degrees of
+freedom of the particle.
+
+% gradient trapping mie regime
+\subsection{Mie Regime}
+
+In the Mie regime, the particle size is comparable to or larger than the
+wavelength of light. This regime would require considering the full solution to
+Maxwell's equations for the interaction between light and the sphere, leading
+to more complex behaviors than in the Rayleigh regime.
+
+\paragraph{Geometrical Optics in Mie Regime:}
+The geometric optics approximation can be used here, where the trapping light
+can be considered as rays that get refracted and reflected as they interact
+with the sphere. Each light ray imparts momentum to the particle according to
+the change in the ray's momentum (light pressure).
+
+\paragraph{Gradient Force:}
+As in the Rayleigh regime, the gradient force still plays a crucial role but
+its calculation becomes more complex due to the detailed interaction of light
+rays with the particle. The distribution of light around the sphere creates
+regions of varying intensity and gradient, and the sphere tends to move towards
+the region of highest intensity. The geometrical momentum transfer and gradient
+force is visualized below.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures/mieworkingprinciple.pdf}
+	\caption{In black the original undisturbed rays are visible in red the rays
+		refracted due to the solid sphere. The dashed circle depicts the resting
+		position of the sphere and is the point where momentum transfer due to
+		refraction is symmetric and horizontal components cancel. In blue one can
+		see the momentum difference due to the refraction for the left and the right
+		beam. Once the negative momentum are added one can see the trapping force
+		acting on the sphere (in green).
+	}\label{fig:mie_working_principle}
+\end{figure}
+
+\subsection{Momentum Transfer}
 
 % Momentum transfer via kinetic light pulses
 
