@@ -14,7 +14,7 @@
 	Light Tweezers}
 
 % Fußzeile
-%\addbibresource{AdvancedMicroscopy.bib}
+\addbibresource{PhotonScience.bib}
 %todo bib
 
 \usepackage{luacode}
@@ -96,7 +96,7 @@ concentration gradient $\nabla c$:
 	\label{eq:ficks_second_law}
 \end{equation}
 This law shows how the concentration changes in response to
-the diffusion spread, balancing out concentration differences over time.
+the diffusion spread, balancing out concentration differences over time.\cite{fickUeberDiffusion1855}
 
 \subsection{Einstein Relation (Einstein-Smoluchowski Equation)}
 
@@ -121,8 +121,8 @@ a potential energy $U(x)=−Fx$ due to a small applied force $F$:
 	\Rightarrow J & = -D \frac{F}{k_BT} c(x)
 \end{align*}
 
-\paragraph{Mobility:} By definition, mobility μμ is the velocity per unit force. Express the flux $J$
-also as $J=\mu Fc(x)$.
+\paragraph{Mobility:} By definition, mobility $\mu$ is the velocity per unit force. Express the flux
+$J$ also as $J=\mu Fc(x)$.
 
 \paragraph{Equating Fluxes:} Equating the two expressions for $J$:
 \begin{align*}
@@ -140,7 +140,8 @@ mobility using the Stokes law for the frictional force:
 	\mu = \frac{F}{v} & = 6 \pi \eta R
 \end{align*}
 
-and arrive at the Stokes–Einstein–Sutherland equation.
+and arrive at the Stokes–Einstein–Sutherland
+equation.\cite{einsteinUberMolekularkinetischenTheorie1905}
 
 \begin{align*}
 	D = \frac{k_B T}{6 \pi \eta R}
@@ -195,7 +196,7 @@ This equation shows that the dipole (the particle) is attracted towards regions
 of higher electric field intensity. In the Gaussian beam, this means the
 particle is pulled towards the beam's center, effectively trapping it at the
 focus where the intensity is maximal. This fixes the other two degrees of
-freedom of the particle.
+freedom of the particle.\cite{bustamanteOpticalTweezersSinglemolecule2021}
 
 % gradient trapping mie regime
 \subsection{Mie Regime}
@@ -217,18 +218,18 @@ its calculation becomes more complex due to the detailed interaction of light
 rays with the particle. The distribution of light around the sphere creates
 regions of varying intensity and gradient, and the sphere tends to move towards
 the region of highest intensity. The geometrical momentum transfer and gradient
-force is visualized below.
+force is visualized below.\cite{bustamanteOpticalTweezersSinglemolecule2021}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/mieworkingprinciple.pdf}
-	\caption{In black the original undisturbed rays are visible in red the rays
-		refracted due to the solid sphere. The dashed circle depicts the resting
-		position of the sphere and is the point where momentum transfer due to
-		refraction is symmetric and horizontal components cancel. In blue one can
-		see the momentum difference due to the refraction for the left and the right
-		beam. Once the negative momentum are added one can see the trapping force
-		acting on the sphere (in green).
+	\caption[Working principle of optical tweezers in mie regime]{In black the original
+		undisturbed rays are visible in red the rays refracted due to the solid sphere.
+		The dashed circle depicts the resting position of the sphere and is the point
+		where momentum transfer due to refraction is symmetric and horizontal
+		components cancel. In blue one can see the momentum difference due to the
+		refraction for the left and the right beam. Once the negative momentum are
+		added one can see the trapping force acting on the sphere (in green).
 	}\label{fig:mie_working_principle}
 \end{figure}
 
@@ -236,7 +237,73 @@ force is visualized below.
 
 % Momentum transfer via kinetic light pulses
 
+Photons are quantum particles of light and carry energy and momentum despite
+having no mass. The momentum pp of a photon is related to its wavelength
+$\lambda$ and energy $E$\cite{einsteinZurQuantentheoriederStrahlung1917}.The
+momentum of a photon is given by the equation:
+
+\begin{equation}
+	p = \frac{E}{c}
+\end{equation}
+
+\paragraph{Light Beam as a Stream of Photons}
+
+A beam of light can be described as a stream of photons, each carrying energy
+and momentum. When considering a beam of light, you can sum the momenta of
+individual photons to understand the total momentum of the beam.
+
+When light (photons) bends due to refraction, there's a change in the direction
+of the photons' momentum. Since momentum is a vector quantity, any change in
+direction implies a change in momentum.
+
+If we consider the force $\vec{F}$ as the rate of change of momentum
+$\frac{\partial\vec{p}}{\partial t}$ then a bending photon experiences a force
+due to its changing momentum. According to Newton's third law, if the photon
+experiences a force the opposite force is experienced by the object . Since a
+force is defined as the time rate of change of momentum $\vec{F} =
+	\frac{\partial\vec{p}}{\partial t}$, and a beam of light is a stream of photons
+each changing momentum upon interaction with an object, the beam itself exerts
+a force. This is observable in phenomena such as radiation pressure, where
+light exerts pressure on surfaces due to momentum transfer from
+photons.\cite{bustamanteOpticalTweezersSinglemolecule2021}
+
 % Angular momentum transfer via circular polarized light
+
+\subsubsection{Angular Momentum Transfer}
+To receive angular momentum and start spinning from polarized light, a
+microscopic particle typically needs to exhibit certain properties such as
+birefringence, non-spherical shape, and the ability to interact with the
+specific polarization state of the incident light.
+
+\paragraph{Birefringence:}
+Birefringent particles can interact with polarized light to convert the angular
+momentum of the photons into mechanical rotation. When a birefringent particle
+is placed in an optical trap and illuminated with circularly polarized light,
+the transfer of spin angular momentum can induce rotation. Transparent
+birefringent particles like calcite can spin with high rotation frequencies
+without overheating due to their
+transparency.\cite{frieseOpticalAlignmentSpinning1998}
+
+\paragraph{Non-Spherical Shape:}
+Non-spherical particles, such as irregularly shaped birefringent particles,
+show different rotational behaviors under polarized light. These particles can
+exhibit periodic acceleration and deceleration due to varying spin angular
+momentum transfer from the light.\cite{rothmayerIrregularSpinAngular2009}
+
+\paragraph{Interaction with Polarization State:}
+The state of polarization of the incident light (linear, circular, or
+elliptical) affects how the angular momentum is imparted to the particle. For
+instance, particles exposed to a circularly polarized light beam can experience
+both spinning and orbital motion around the beam axis, as demonstrated in
+experiments with Gaussian beams. \cite{angelskyCircularMotionParticles2012}
+
+\paragraph{Absorption and Optical Properties:}
+The optical properties of the particles, such as absorption and refractive
+index, also play a significant role. For instance, gold nanoparticles can
+achieve very high rotation frequencies when illuminated with circularly
+polarized light due to their favorable optical properties and the low local
+viscosity caused by particle surface heating.
+\cite{lehmuskeroUltrafastSpinningGold2013}
 
 \section{Experimental Setup}\label{sec:versuchsanordnung}
 
