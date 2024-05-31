@@ -233,7 +233,7 @@ force is visualized below.\cite{bustamanteOpticalTweezersSinglemolecule2021}
 	}\label{fig:mie_working_principle}
 \end{figure}
 
-\subsection{Momentum Transfer}
+\subsection{Momentum Transfer}\label{sec:momentumTransfer}
 
 % Momentum transfer via kinetic light pulses
 
@@ -269,7 +269,7 @@ photons.\cite{bustamanteOpticalTweezersSinglemolecule2021}
 
 % Angular momentum transfer via circular polarized light
 
-\subsubsection{Angular Momentum Transfer}
+\subsubsection{Angular Momentum Transfer}\label{sec:angularMomentumTransfer}
 To receive angular momentum and start spinning from polarized light, a
 microscopic particle typically needs to exhibit certain properties such as
 birefringence, non-spherical shape, and the ability to interact with the
@@ -457,7 +457,12 @@ the laser beam is visible which is shown in \autoref{fig:laser_focus}.
 %todo pic laserfocus
 
 When the laser is in focus one can try to kick some particles with the laser
-beam by varying its power and moving it across the sample.
+beam by varying its power and moving it across the sample. This works on the
+principal of the radiation pressure, where the momentum of the photons is
+transferred to the particle. This was observed by the sudden movement of the
+particle once the laser beam hits it. These principles were discussed in detail
+in \autoref{sec:momentumTransfer}. Another way of inducing particle motion will
+be discussed in \autoref{sec:AuswertungAngularMomentum}.
 
 \subsection{Trapping with laser}
 % Analyse the video again with the tracking tool used above. What’s the 
@@ -513,16 +518,16 @@ drifting away, as visible in \autoref{fig:stacked}.
 % temperature T.
 
 The aim of this experiment is to determine the holding force of the laser beam.
-Therefore it is important that the focus of the laser is perfectly aligned. To
+Therefore, it is important that the focus of the laser is perfectly aligned. To
 check this one can try to stack 2 particles, as described before. When the
 particles can be stacked, the focus lies in the correct level.
 
-Now one tries to find the speed of the lasermovement, where the particle can
+Now one tries to find the speed of the laser movement, where the particle can
 follow. To determine this the speed of the movement can be regulated in the
 menu of the controller. In order to find the speed one tries a binary search,
 which means always try to divide the interval in 2 sections of approximately
 the same size and so look for the speed stepwise. It is important to always try
-for the same spot in the sample, because at an other position there could be
+for the same spot in the sample, because at another position there could be
 other conditions and so the results can not be compared. It is also important
 to keep in mind the drift due to the dry of the sample, as already mentioned in
 \autoref{seq:durchfurung_microscope}. This procedure is now repeated for
@@ -537,7 +542,13 @@ visible in \autoref{tab:movement}.
 % Discuss and explain your findings. Compare them to the previous 
 % experiments. 
 
-For this part the sample is changed. When removing the object holder vit is
+% Todo mention Rayleigh regime since the particle are really small
+% they probably smaller then the wavelength of the light
+% this would also explain the purple colour of the particles
+% they seem to nanoparticles of gold
+% have a look at some literature is also structured light vo relevant
+
+For this part the sample is changed. When removing the object holder it is
 important to go down in z-direction with the sample stage in order to do not
 hit the objective by changing the sample.
 
@@ -562,29 +573,48 @@ For this part of the experiment one needs a sample with living bacteria on it.
 Therefore, a gulp of "ayran" \ gets diluted with water to make it transparent.
 
 When everything is aligned and the laser is switched on again, one can try to
-find a bacterium. The can be easily detected due to the movement. When one
-traps the particle with the laser beam one can immediately observe, that it
-stops its movement and aligns with the laser beam, as visible in
-\autoref{fig:bacterium}.
+find a bacterium. These bacteria can be easily detected due to their
+non-erratic movement. These bacteria have a major and minor axis and have
+cylindrical symmetry, once they enter the trap one can immediately observe,
+that it stops its movement and its major axis aligns with the laser beam, as
+visible in \autoref{fig:bacterium}. This happens, because this alignment is
+energetically favorable.
 
+These particles are probably staphylococci, because their more spherical nature
+than streptococci. They also build smaller chains and this is in agreement with
+the observation, that the longest chain was 3 long. Longer chains are
+improbable since they would build cluster, which are also sometimes visible in
+the sample. In order to verify this, one could use a gram staining to
+differentiate between the two types of bacteria. Since they are gram positive,
+they would appear purple in the staining. This happens, because the cell wall
+is made of 40+ layers of murein, which is a peptidoglycan, and the staining
+particle sticks to it in the deep layers. After a cleaning cycle the dye would
+remain in the cell and the bacteria would appear purple. For bacteria with
+fewer layers, like gram negative bacteria, the dye would be washed
+out.\cite{ghazalMicrobiologicalHygenicDiscussion2024}
 %todo bacterium
 
-\subsection{Transfer of angular momentum}
+\subsection{Transfer of angular momentum}\label{sec:AuswertungAngularMomentum}
 % If the light changes its angular momentum during the interaction, part of 
 % this angular momentum must be exerted (partially) on the particle. Which 
 % properties a microscopic particle should exhibit for the overall angular 
 % momentum of the incoming light to change?
 
-For this part of the experiment the sample "vaterite" \ is used. To avoid
-pollution of the "ayran"\ sample this sample is placed on a new object holder.
+For this part of the experiment it is important to choose a particle, which has
+the necessary properties to transfer the angular momentum of the laser to it.
+Therefore the sample "vaterite" \ is used, since it birefringent (see
+\autoref{sec:angularMomentumTransfer} for the other necessary properties for
+this behavior). To avoid pollution of the "ayran"\ sample this sample is placed
+on a new object holder.
 
 When everything is aligned one navigates through the sample and searches for a
-particle that looks round but has a slight discontinuity, to later observe
+particle that looks round but has a slight asymmetry, to later observe
 rotations of it.
 
-To transfer the angular momentum of the laser one has to change its handyness.
-This is done by holding a waveplate into the telescope and rotating it while
-observing the trapped particle.
+To transfer the angular momentum of the laser to the particle one firstly needs
+to change the polarization from linear to circular light. This is done by
+holding a waveplate into the telescope and rotating it while observing the
+trapped particle.
 
 % Now, trap a particle with the circularly polarized light beam, record a video, 
 % and discuss what you observe and what should you observe. 
@@ -805,3 +835,12 @@ using the standard mean error.
 \listoffigures
 \listoftables
 \end{document}
+
+% @article{einsteinZurQuantentheoriederStrahlung1917,
+%   author = "Einstein, A.",
+%   title = "{Zur Quantentheorie der Strahlung}",
+%   journal = "Phys. Z.",
+%   volume = "18",
+%   pages = "121--128",
+%   year = "1917",
+% }
