@@ -54,8 +54,6 @@ During the experiment the following steps need to be performed:
 
 \section{Grundlagen}\label{Grund}
 
-% todo bitte mit ai
-
 % Brownian motion connection to viscosity then connection to slope of squared displacement
 % then connection between trap stiffness and holding force.
 \subsection{Brownian Motion and Its Relation to Diffusion}
@@ -405,8 +403,6 @@ particles. One of these spots is visible in \autoref{fig:part_overview_1} and
 \autoref{fig:part_overview_2}, as an example. The same procedure is again
 carried out for another spot.
 
-%todo pic
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{figures/I1_tracked.pdf}
@@ -429,10 +425,10 @@ carried out for another spot.
 	}\label{fig:part_overview_2}
 \end{figure}
 
-It is important to keep in mind that after looking at the sample some time it
-starts to dry, and gives the particles some kind of a drift towards the middle
-of the sample. This can be observed by a "dry-wall" \ that starts to move over
-the sample, as visible in \autoref{fig:dry_wall}
+It is important to keep in mind that starts to dry, and this makes the
+particles drift towards an edge of the sample. This can be observed by a
+"dry-wall" \ that starts to move over the sample, as visible in
+\autoref{fig:dry_wall}
 
 % todo pic dry wall
 
@@ -442,15 +438,13 @@ trocknung
 % What other mechanisms in light-matter interactions could be taken 
 % advantage of to induce particle motion? 
 
-For this part of the example the laser module without the telescope is added to
-the setup, as visible in \autoref{fig:aufbau}. From now on it is very important
-to keep in mind the principles of laser safety and use the laser safety
-googles, when the laser is running.
+For this part of the experiment the laser module without the telescope is added
+to the setup, the exact setup can be seen in \autoref{fig:aufbau}. From now on
+it is very important to keep in mind the principles of laser safety and use the
+laser safety googles, when the laser is turned on. When everything is prepared
+the laser can be switched on and the power can slowly be increased.
 
-When everything is attached to the setup the laser can be switched on and the
-power can slowly be increased.
-
-Now again the z-position of the stage needs to be increased until the focus of
+Once again the z-position of the stage needs to be increased until the focus of
 the laser becomes visible in the plane. There are in total 3 positions where
 the laser beam is visible which is shown in \autoref{fig:laser_focus}.
 
@@ -476,30 +470,42 @@ be discussed in \autoref{sec:AuswertungAngularMomentum}.
 
 The aim of this experiment is to trap a particle inside the laser beam. This
 can be achieved by turning the laser to its highest power witch is at the
-explicit case \SI{100}{\milli\ampere} and than bringing it close to a freely
+explicit case \SI{100}{\milli\ampere} and then bringing it close to a freely
 moving particle. The soaking of the particle can be observed. By moving the
 laser freely over the sample, the particle can be guided. By varying the power
-of the laser one can observe, that an explicit force is needed in order to trap
-the particle, depending on its size.
+of the laser one can observe holding force increases with increased power.
+Furthermore, a size dependency was observed, smaller particles need less power
+to be trapped.
 
 To also increase the power of the laser beam, the telescope cage, visible in
-\autoref{fig:aufbau}, is included to the setup, in order to increase the power
-of the beam. The interesting thing is, that the telescope had no visible effect
-on the trapping of the particle.
-%todo sag ma des e oder
+\autoref{fig:aufbau}, is included to the setup, in order to focus the radiation
+pressure of the beam. The interesting thing is, that the telescope didn't have
+a visible effect on the trapping strength. This was a bit odd and will be
+discussed in \autoref{sec:diskussion}.
 
 Now one particle is trapped and slowly brought to a place on the sample, where
 also some other particles of approximately the same size are freely moving, as
-visible in \autoref{fig:tapping} and recorded to compare the movement of the
-trapped particle with the freely moving one.
+visible in \autoref{fig:part_overview_trap} and recorded to compare the
+movement of the trapped particle with the freely moving one.
 
-%todo trapping
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/III_tracked.pdf}
+	\caption[Capture of trapped particle]{This figure contains the initial conditions of the
+		tracked region displayed in the background and has the trajectories of the
+		particles overlaid from cold to hot indicating the time evolution of the
+		particles. Furthermore, the particles are labeled and plotted on an x, y
+		coordinate grid. This tracking captured two particles first particle (1) is
+		free and the second particle (2) is trapped.
+	}\label{fig:part_overview_trap}
+\end{figure}
 
-Now one tries to catch 2 particles at the same time. When both particles are
-captured by the laser beam and the focus is regulated a bit, by adjusting the
-z-position of the sample, the particles can be stacked. In the image it looks
-like one particle, but when turning of the laser one can observe both particles
-drifting away, as visible in \autoref{fig:stacked}.
+Next will be demonstrated that catching 2 particles at the same time is
+possible. When both particles are captured by the laser beam and the focus is
+regulated a bit, by adjusting the z-position of the sample, the particles can
+be stacked. In the image it looks like one particle, but when turning of the
+laser one can observe both particles drifting away, as visible in
+\autoref{fig:stacked}.
 
 %todo fig:stacked
 
@@ -518,23 +524,50 @@ drifting away, as visible in \autoref{fig:stacked}.
 % temperature T.
 
 The aim of this experiment is to determine the holding force of the laser beam.
-Therefore, it is important that the focus of the laser is perfectly aligned. To
-check this one can try to stack 2 particles, as described before. When the
-particles can be stacked, the focus lies in the correct level.
+Therefore, it is important that the focus of the laser is perfectly aligned.
+The aforementioned procedure was used to calibrate laser such that the force it
+has the maximal force. When multiple particles are bunched together and then
+the laser is able to align them this indicates, that this z-position is
+maximizing the holding force.
 
-Now one tries to find the speed of the laser movement, where the particle can
-follow. To determine this the speed of the movement can be regulated in the
-menu of the controller. In order to find the speed one tries a binary search,
-which means always try to divide the interval in 2 sections of approximately
-the same size and so look for the speed stepwise. It is important to always try
-for the same spot in the sample, because at another position there could be
-other conditions and so the results can not be compared. It is also important
-to keep in mind the drift due to the dry of the sample, as already mentioned in
-\autoref{seq:durchfurung_microscope}. This procedure is now repeated for
-different laser powers and for 2 different particle sizes. The results are
-visible in \autoref{tab:movement}.
+Next we find the limiting speed of the laser movement, where the particle are
+barely able to follow laser beam and remain trapped. To determine this the
+speed of the movement can be regulated in the menu of the controller. In order
+to find the correct speed we employed binary search, which means always try to
+divide the search space in every step. It is critical to remain at the same
+location while trying to find the correct speed, because at another location
+there might be some contamination on which the trapped particle could get stuck
+on. It is also important to keep in mind the drift due to the drying of the
+sample, as already mentioned in \autoref{seq:durchfurung_microscope}. This
+procedure is now repeated for different laser powers and for 2 different
+particle sizes. The results are visible in \autoref{tab:velocities}.
 
-%todo tab movement
+\begin{table}
+	\caption{This table contains measured velocities and whether the particle
+		remained trapped moving with the velocity at a certain laser power.
+		All velocities are measured in \si{\milli\meter\per\second}. Here
+		is max power of the laser diode \SI{50}{\milli\watt} at \SI{100}{\milli\ampere}
+		driver current. In the last row the chosen velocities for their respective
+		categories are displayed. In the \SI{50}{\percent} category the results
+		were averaged and in the \SI{100}{\percent} category the last binding
+		velocity was used. The uncertainties are due the discretization of the actuator velocity,
+		and the uncertainty are for all the velocities is $\SI{0.002}{\milli\meter\per\second}$.
+	}\label{tab:velocities}
+	\centering
+	\begin{tblr}{colspec={cc|cc|cc|cc}}
+		\SetCell[c=4]{c} $@\SI{50}{\percent}$ Power   &          &                                &          & \SetCell[c=4]{c} $@\SI{100}{\percent}$ Power &          &                                 &          \\
+		$v_\text{Big} / \si{\milli\meter\per\second}$ & Trapped? & $v_\text{Small}$               & Trapped? & $v_\text{Big}$                               & Trapped? & $v_\text{Small}$                & Trapped? \\
+		\num{0.081}                                   & \bot     & \num{0.071}                    & \bot     & \num{0.250}                                  & \bot     & \num{0.087}                     & \bot     \\
+		\num{0.051}                                   & \bot     & \num{0.035}                    & \bot     & \num{0.106}                                  & \bot     & \num{0.071}                     & \bot     \\
+		\num{0.044}                                   & \bot     & \num{0.021}                    & \bot     & \num{0.094}                                  & \bot     & \num{0.062}                     & \top     \\
+		\num{0.030}                                   & \bot     & \num{0.018}                    & \bot     & \num{0.080}                                  & \sim     &                                 &          \\
+		\num{0.025}                                   & \bot     & \num{0.016}                    & \bot     & \num{0.076}                                  & \sim     &                                 &          \\
+		\num{0.023}                                   & \top     & \num{0.014}                    & \top     & \num{0.062}                                  & \top     &                                 &          \\
+		\num{0.021}                                   & \top     & \num{0.011}                    & \top     & \num{0.053}                                  & \top     &                                 &          \\
+		\num{0.018}                                   & \top     & \num{0.005}                    & \top     & \num{0.030}                                  & \top     &                                 &          \\ \hline
+		\SetCell[c=2]{c}\num{0.024(2)}                &          & \SetCell[c=2]{c}\num{0.015(2)} &          & \SetCell[c=2]{c}\num{0.062(2)}               &          & \SetCell[c=2]{c} \num{0.062(2)} &
+	\end{tblr}
+\end{table}
 
 \subsection{Characterization of unknown sample}
 % Experimentally characterizing the trapping performance in dependence on 
@@ -602,10 +635,10 @@ out.\cite{ghazalMicrobiologicalHygenicDiscussion2024}
 
 For this part of the experiment it is important to choose a particle, which has
 the necessary properties to transfer the angular momentum of the laser to it.
-Therefore the sample "vaterite" \ is used, since it birefringent (see
-\autoref{sec:angularMomentumTransfer} for the other necessary properties for
-this behavior). To avoid pollution of the "ayran"\ sample this sample is placed
-on a new object holder.
+This is the reason why, "vaterite" \ is used as a sample, since it birefringent
+(see \autoref{sec:angularMomentumTransfer} for the other necessary properties
+for this behavior). To avoid pollution of the "ayran"\ sample this sample is
+placed on a new object holder.
 
 When everything is aligned one navigates through the sample and searches for a
 particle that looks round but has a slight asymmetry, to later observe
@@ -668,18 +701,6 @@ until they are displayed in tables.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{figures/III_tracked.pdf}
-	\caption[Capture of trapped particle]{This figure contains the initial conditions of the
-		tracked region displayed in the background and has the trajectories of the
-		particles overlaid from cold to hot indicating the time evolution of the
-		particles. Furthermore, the particles are labeled and plotted on an x, y
-		coordinate grid. This tracking captured two particles first particle (1) is
-		free and the second particle (2) is trapped.
-	}\label{fig:part_overview_trap}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
 	\includegraphics[width=0.95\textwidth]{figures/III_particle_trapped.pdf}
 	\caption[Time averaged mean squared displacements of trapped particle]{This figure one
 		can see the time averaged mean squared displacements ($\left\langle \Delta s^2
@@ -738,33 +759,6 @@ using the standard mean error.
 \end{table}
 
 \subsection{Holding force}
-
-\begin{table}
-	\caption{This table contains measured velocities and whether the particle
-		remained trapped moving with the velocity at a certain laser power.
-		All velocities are measured in \si{\milli\meter\per\second}. Here
-		is max power of the laser diode \SI{50}{\milli\watt} at \SI{100}{\milli\ampere}
-		driver current. In the last row the chosen velocities for their respective
-		categories are displayed. In the \SI{50}{\percent} category the results
-		were averaged and in the \SI{100}{\percent} category the last binding
-		velocity was used. The uncertainties are due the discretization of the actuator velocity,
-		and the uncertainty are for all the velocities is $\SI{0.002}{\milli\meter\per\second}$.
-	}\label{tab:velocities}
-	\centering
-	\begin{tblr}{colspec={cc|cc|cc|cc}}
-		\SetCell[c=4]{c} $@\SI{50}{\percent}$ Power   &          &                                &          & \SetCell[c=4]{c} $@\SI{100}{\percent}$ Power &          &                                 &          \\
-		$v_\text{Big} / \si{\milli\meter\per\second}$ & Trapped? & $v_\text{Small}$               & Trapped? & $v_\text{Big}$                               & Trapped? & $v_\text{Small}$                & Trapped? \\
-		\num{0.081}                                   & \bot     & \num{0.071}                    & \bot     & \num{0.250}                                  & \bot     & \num{0.087}                     & \bot     \\
-		\num{0.051}                                   & \bot     & \num{0.035}                    & \bot     & \num{0.106}                                  & \bot     & \num{0.071}                     & \bot     \\
-		\num{0.044}                                   & \bot     & \num{0.021}                    & \bot     & \num{0.094}                                  & \bot     & \num{0.062}                     & \top     \\
-		\num{0.030}                                   & \bot     & \num{0.018}                    & \bot     & \num{0.080}                                  & \sim     &                                 &          \\
-		\num{0.025}                                   & \bot     & \num{0.016}                    & \bot     & \num{0.076}                                  & \sim     &                                 &          \\
-		\num{0.023}                                   & \top     & \num{0.014}                    & \top     & \num{0.062}                                  & \top     &                                 &          \\
-		\num{0.021}                                   & \top     & \num{0.011}                    & \top     & \num{0.053}                                  & \top     &                                 &          \\
-		\num{0.018}                                   & \top     & \num{0.005}                    & \top     & \num{0.030}                                  & \top     &                                 &          \\ \hline
-		\SetCell[c=2]{c}\num{0.024(2)}                &          & \SetCell[c=2]{c}\num{0.015(2)} &          & \SetCell[c=2]{c}\num{0.062(2)}               &          & \SetCell[c=2]{c} \num{0.062(2)} &
-	\end{tblr}
-\end{table}
 
 \begin{equation}
 	\vert F_\text{trap} \vert =\vert k \delta x \vert = F_\text{Stoke}  = 6 \pi R \eta_\text{eff} v
