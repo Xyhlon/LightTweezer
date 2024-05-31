@@ -141,20 +141,20 @@ mobility using the Stokes law for the frictional force:
 and arrive at the Stokes–Einstein–Sutherland
 equation.\cite{einsteinUberMolekularkinetischenTheorie1905}
 
-\begin{align*}
+\begin{equation}
 	D = \frac{k_B T}{6 \pi \eta R}
 	\label{eq:sto_ein_sut}
-\end{align*}
+\end{equation}
 
 Lastly one can equate the Brownian motion and the diffusion constant to get
 the:
 
-\begin{align*}
-	\left \langle (\Delta x)^2 \right \rangle                                         & = 2 d \frac{k_B T}{6 \pi \eta R} t        \\
-	\text{using the differential form:}                                               &                                           \\
-	\text{d}\left \langle (\Delta x)^2 \right \rangle                                 & =  \frac{d k_B T}{3 \pi \eta R} \text{d}t \\
-	\Rightarrow \frac{\partial \left \langle (\Delta x)^2 \right \rangle}{\partial t} & =  \frac{d k_B T}{3 \pi \eta R}
-\end{align*}
+\begin{align}
+	\left \langle (\Delta x)^2 \right \rangle                                         & = 2 d \frac{k_B T}{6 \pi \eta R} t                   \\
+	\text{using the differential form:}                                               &                                                      \\
+	\text{d}\left \langle (\Delta x)^2 \right \rangle                                 & =  \frac{d k_B T}{3 \pi \eta R} \text{d}t            \\
+	\Rightarrow \frac{\partial \left \langle (\Delta x)^2 \right \rangle}{\partial t} & =  \frac{d k_B T}{3 \pi \eta R}\label{eq:slope_visc}
+\end{align}
 
 \subsection{Optical Trapping}
 
@@ -362,7 +362,15 @@ For the setup the following parts in \autoref{tab:gerate} are used.
 	\end{center}
 \end{table}
 
-\section{Implementation and Measurement}\label{sec:versuchsdurchfuehrung_messergebnisse}
+\section{Measurement and Analysis}\label{sec:versuchsdurchfuehrung_messergebnisse}
+
+In order to see how the uncertainty of the measurements propagates into the
+results, the extended Gauss method was used. For the analysis python was used
+in combinations with the packages \verb#scikit-learn#, \verb#numpy#,
+\verb#opencv#, \verb#scipy#,\verb#matplotlib# and \verb#uncertainties#.
+
+In order to ensure the highest possible accuracy, the values are not rounded
+until they are displayed in tables.
 
 \subsection{Microscope}\label{seq:durchfurung_microscope}
 
@@ -424,6 +432,88 @@ carried out for another spot.
 		coordinate grid. This is the second capture of particles.
 	}\label{fig:part_overview_2}
 \end{figure}
+
+Using the trajectories of the particles one can now calculate the effective
+viscosity $\eta_\text{eff}$ of the liquid using the mean squared displacement.
+The effective viscosity is calculated using the rate of change of the mean
+squared displacements $s$. Solving the \autoref{eq:slope_visc} for the
+effective viscosity $\eta_\text{eff}$ one gets:
+
+\begin{equation}
+	\eta_\text{eff} = \frac{2k_B T}{3\pi s R}
+	\label{eq:eff_visc}
+\end{equation}
+
+But firstly one needs to calculate the mean squared displacements $s$ for each
+of the particle trajectories.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.48\textwidth]{figures/I1_particle_1.pdf}
+	\includegraphics[width=0.48\textwidth]{figures/I1_particle_2.pdf}
+	\includegraphics[width=0.48\textwidth]{figures/I1_particle_3.pdf}
+	\caption[Time averaged mean squared displacements from the particles of the first
+		capture]{This figure one can see the time averaged mean squared displacements
+		($\left\langle \Delta s^2 \right\rangle(t_n)$) (averaged up to every time step
+		$t_n$) in X and Y direction and the radial direction R. The labels correspond
+		to particles in \autoref{fig:part_overview_1}.
+	}\label{fig:part_first}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.48\textwidth]{figures/I2_particle_1.pdf}
+	\includegraphics[width=0.48\textwidth]{figures/I2_particle_2.pdf}
+	\includegraphics[width=0.48\textwidth]{figures/I2_particle_3.pdf}
+	\caption[Time averaged mean squared displacements from the particles of the second
+		capture]{This figure one can see the time averaged mean squared displacements
+		($\left\langle \Delta s^2 \right\rangle(t_n)$) (averaged up to every time step
+		$t_n$) in X and Y direction and the radial direction R. The labels correspond
+		to particles in \autoref{fig:part_overview_2}.
+	}\label{fig:part_second}
+\end{figure}
+
+Using the slope of the fitted lines $s$, the radius of the spherical particles
+$R=\SI{2.06}{\micro\meter}$ and the medium temperature of
+$T=\SI{308.15(15.00)}{\kelvin} = \SI{35(15)}{\celsius}$ we can calculate the
+effective viscosity $\eta_\text{eff}$. Here the temperature was assumed to be
+the \SI{20}{\celsius} above the room temperature. Since the irradiance of lamp
+was heating up the liquid. This is the only uncertainty considered in the
+calculation of $\eta_\text{eff}$. Since the RANSAC-Regressor was used to find
+the slopes and this method of fitting does not provide uncertainties for the
+fitted parameters. It would be possible to calculate the uncertainty of the
+slope by using the least squares method for fitting after removing the
+outliers. But this was not done in this case, since we use the obtained
+effective viscosities to derive a representative effective viscosity using the
+median statistic (for its robustness against outliers) is used for the $\mu$
+estimator. This is allowed if the underling distribution is symmetric and with
+finite mean has a median equal to its mean. This is the case if this estimator
+will vary like a normal distribution and thus the error will be calculated
+using the standard mean error.
+
+\begin{table}[H]
+	\caption[Collected effective viscosities]{This table contains the effective viscosities
+		$\eta_\text{eff}$ of all the tracked particles from \autoref{fig:part_first}
+		and \autoref{fig:part_second}, which where calculated using
+		\autoref{eq:eff_visc}. Here is only the uncertainty due to actual temperature
+		in the fluid considered in the measured effective viscosities. Using the median
+		statistic and the standard mean error the estimator for the true
+		$\hat{\eta_\text{eff}}$ is calculated.
+	}\label{tab:eff_visc} \centering
+	\begin{tblr}{colspec={lc}}
+		                                             & $\eta_\text{eff}$                    \\
+		Capture 1 Particle 1                         & \SI{0.63(30) }{\milli\pascal\second} \\
+		Capture 1 Particle 2                         & \SI{1.03(5) }{\milli\pascal\second}  \\
+		Capture 1 Particle 3                         & \SI{0.97(5) }{\milli\pascal\second}  \\
+		Capture 2 Particle 1                         & \SI{0.51(3) }{\milli\pascal\second}  \\
+		Capture 2 Particle 2                         & \SI{0.87(4) }{\milli\pascal\second}  \\
+		Capture 2 Particle 3                         & \SI{0.278(14)}{\milli\pascal\second} \\
+		$\hat{\theta}(\mu(\eta_\text{eff}))$         & \SI{0.87}{\milli\pascal\second}      \\
+		SEM($\eta_\text{eff}$)                       & \SI{0.267}{\milli\pascal\second}     \\
+		$\Delta\eta_{\text{eff}_\text{Temperature}}$ & \SI{0.04}{\milli\pascal\second}      \\
+		$\hat{\eta_\text{eff}}$                      & \SI{0.9(4)}{\milli\pascal\second}
+	\end{tblr}
+\end{table}
 
 It is important to keep in mind that starts to dry, and this makes the
 particles drift towards an edge of the sample. This can be observed by a
@@ -500,6 +590,22 @@ movement of the trapped particle with the freely moving one.
 	}\label{fig:part_overview_trap}
 \end{figure}
 
+If we use the captured trajectories and calculate the mean squared
+displacements for the trapped particle we can see the difference between
+trapped and free clearly in the following \autoref{fig:part_trapped}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/III_particle_trapped.pdf}
+	\caption[Time averaged mean squared displacements of trapped particle]{This figure one
+		can see the time averaged mean squared displacements ($\left\langle \Delta s^2
+			\right\rangle(t_n)$) (averaged up to every time step $t_n$) in X and Y
+		direction and the radial direction R for the trapped particle. The labels
+		correspond to particles in \autoref{fig:part_overview_trap}. Furthermore, the
+		trapping was turned off at around step $n=1250$ to contrast trapped vs free.
+	}\label{fig:part_trapped}
+\end{figure}
+
 Next will be demonstrated that catching 2 particles at the same time is
 possible. When both particles are captured by the laser beam and the focus is
 regulated a bit, by adjusting the z-position of the sample, the particles can
@@ -542,7 +648,7 @@ sample, as already mentioned in \autoref{seq:durchfurung_microscope}. This
 procedure is now repeated for different laser powers and for 2 different
 particle sizes. The results are visible in \autoref{tab:velocities}.
 
-\begin{table}
+\begin{table}[H]
 	\caption{This table contains measured velocities and whether the particle
 		remained trapped moving with the velocity at a certain laser power.
 		All velocities are measured in \si{\milli\meter\per\second}. Here
@@ -566,6 +672,31 @@ particle sizes. The results are visible in \autoref{tab:velocities}.
 		\num{0.021}                                   & \top     & \num{0.011}                    & \top     & \num{0.053}                                  & \top     &                                 &          \\
 		\num{0.018}                                   & \top     & \num{0.005}                    & \top     & \num{0.030}                                  & \top     &                                 &          \\ \hline
 		\SetCell[c=2]{c}\num{0.024(2)}                &          & \SetCell[c=2]{c}\num{0.015(2)} &          & \SetCell[c=2]{c}\num{0.062(2)}               &          & \SetCell[c=2]{c} \num{0.062(2)} &
+	\end{tblr}
+\end{table}
+
+Using the measured velocities and the effective viscosities from the
+\autoref{tab:eff_visc} one can calculate the holding forces by equating the
+frictional force with the holding force. The frictional force is described by
+law of Stokes, which is given by the equation:
+
+\begin{equation}
+	\vert F_\text{trap} \vert =\vert k \delta x \vert = F_\text{Stoke}  = 6 \pi R \eta_\text{eff} v
+	\label{eq:holding_force}
+\end{equation}
+
+\begin{table}[H]
+	\caption{This table contains the calculated holding forces $F_\text{trap}$ using \autoref{eq:holding_force}
+		and the obtained value for the effective viscosity $\eta_\text{eff}$ from \autoref{tab:eff_visc} and the
+		values for the critical holding velocities from \autoref{tab:velocities}.
+	}\label{tab:holding_forces}
+	\centering
+	\begin{tblr}{colspec={lc}}
+		                          & $F_\text{trap}$             \\
+		Big @\SI{50}{\percent}    & \SI{0.43(16)}{\pico\newton} \\
+		Big @\SI{100}{\percent}   & \SI{1.1(4)}{\pico\newton}   \\
+		Small @\SI{50}{\percent}  & \SI{0.19(8)}{\pico\newton}  \\
+		Small @\SI{100}{\percent} & \SI{0.8(3)}{\pico\newton}
 	\end{tblr}
 \end{table}
 
@@ -657,142 +788,12 @@ explained, because many parameters need to fit in order to create that effect.
 
 %todo willst du da no mehr schreiben dazu?
 
-\section{Analysis}\label{sec:auswertung}
-
-In order to see how the uncertainty of the measurements propagates into the
-results, the extended Gauss method was used. For the analysis python was used
-in combinations with the packages \verb#scikit-learn#, \verb#numpy#,
-\verb#opencv#, \verb#scipy#,\verb#matplotlib# and \verb#uncertainties#.
-
-In order to ensure the highest possible accuracy, the values are not rounded
-until they are displayed in tables.
-
-\subsection{Microscope}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.48\textwidth]{figures/I1_particle_1.pdf}
-	\includegraphics[width=0.48\textwidth]{figures/I1_particle_2.pdf}
-	\includegraphics[width=0.48\textwidth]{figures/I1_particle_3.pdf}
-	\caption[Time averaged mean squared displacements from the particles of the first
-		capture]{This figure one can see the time averaged mean squared displacements
-		($\left\langle \Delta s^2 \right\rangle(t_n)$) (averaged up to every time step
-		$t_n$) in X and Y direction and the radial direction R. The labels correspond
-		to particles in \autoref{fig:part_overview_1}.
-	}\label{fig:part_first}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.48\textwidth]{figures/I2_particle_1.pdf}
-	\includegraphics[width=0.48\textwidth]{figures/I2_particle_2.pdf}
-	\includegraphics[width=0.48\textwidth]{figures/I2_particle_3.pdf}
-	\caption[Time averaged mean squared displacements from the particles of the second
-		capture]{This figure one can see the time averaged mean squared displacements
-		($\left\langle \Delta s^2 \right\rangle(t_n)$) (averaged up to every time step
-		$t_n$) in X and Y direction and the radial direction R. The labels correspond
-		to particles in \autoref{fig:part_overview_2}.
-	}\label{fig:part_second}
-\end{figure}
-
-\subsection{Lasergun}
-
-\subsection{Trapping with laser}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{figures/III_particle_trapped.pdf}
-	\caption[Time averaged mean squared displacements of trapped particle]{This figure one
-		can see the time averaged mean squared displacements ($\left\langle \Delta s^2
-			\right\rangle(t_n)$) (averaged up to every time step $t_n$) in X and Y
-		direction and the radial direction R for the trapped particle. The labels
-		correspond to particles in \autoref{fig:part_overview_trap}. Furthermore, the
-		trapping was turned off at around step $n=1250$ to contrast trapped vs free.
-	}\label{fig:part_trapped}
-\end{figure}
-
-\begin{equation}
-	\eta_\text{eff} = \frac{2k_B T}{3\pi s R}
-	\label{eq:eff_visc}
-\end{equation}
-
-Using the slope of the fitted lines $s$, the radius of the spherical particles
-$R=\SI{2.06}{\micro\meter}$ and the medium temperature of
-$T=\SI{308.15(15.00)}{\kelvin} = \SI{35(15)}{\celsius}$ we can calculate the
-effective viscosity $\eta_\text{eff}$. Here the temperature was assumed to be
-the \SI{20}{\celsius} above the room temperature. Since the irradiance of lamp
-was heating up the liquid. This is the only uncertainty considered in the
-calculation of $\eta_\text{eff}$. Since the RANSAC-Regressor was used to find
-the slopes and this method of fitting does not provide uncertainties for the
-fitted parameters. It would be possible to calculate the uncertainty of the
-slope by using the least squares method for fitting after removing the
-outliers. But this was not done in this case, since we use the obtained
-effective viscosities to derive a representative effective viscosity using the
-median statistic (for its robustness against outliers) is used for the $\mu$
-estimator. This is allowed if the underling distribution is symmetric and with
-finite mean has a median equal to its mean. This is the case if this estimator
-will vary like a normal distribution and thus the error will be calculated
-using the standard mean error.
-
-\begin{table}[H]
-	\caption[Collected effective viscosities]{This table contains the effective viscosities
-		$\eta_\text{eff}$ of all the tracked particles from \autoref{fig:part_first}
-		and \autoref{fig:part_second}, which where calculated using
-		\autoref{eq:eff_visc}. Here is only the uncertainty due to actual temperature
-		in the fluid considered in the measured effective viscosities. Using the median
-		statistic and the standard mean error the estimator for the true
-		$\hat{\eta_\text{eff}}$ is calculated.
-	}\label{tab:eff_visc} \centering
-	\begin{tblr}{colspec={lc}}
-		                                             & $\eta_\text{eff}$                    \\
-		Capture 1 Particle 1                         & \SI{0.63(30) }{\milli\pascal\second} \\
-		Capture 1 Particle 2                         & \SI{1.03(5) }{\milli\pascal\second}  \\
-		Capture 1 Particle 3                         & \SI{0.97(5) }{\milli\pascal\second}  \\
-		Capture 2 Particle 1                         & \SI{0.51(3) }{\milli\pascal\second}  \\
-		Capture 2 Particle 2                         & \SI{0.87(4) }{\milli\pascal\second}  \\
-		Capture 2 Particle 3                         & \SI{0.278(14)}{\milli\pascal\second} \\
-		$\hat{\theta}(\mu(\eta_\text{eff}))$         & \SI{0.87}{\milli\pascal\second}      \\
-		SEM($\eta_\text{eff}$)                       & \SI{0.267}{\milli\pascal\second}     \\
-		$\Delta\eta_{\text{eff}_\text{Temperature}}$ & \SI{0.04}{\milli\pascal\second}      \\
-		$\hat{\eta_\text{eff}}$                      & \SI{0.9(4)}{\milli\pascal\second}
-	\end{tblr}
-\end{table}
-
-\subsection{Holding force}
-
-\begin{equation}
-	\vert F_\text{trap} \vert =\vert k \delta x \vert = F_\text{Stoke}  = 6 \pi R \eta_\text{eff} v
-	\label{eq:holding_force}
-\end{equation}
-
-\begin{table}
-	\caption{This table contains the calculated holding forces $F_\text{trap}$ using \autoref{eq:holding_force}
-		and the obtained value for the effective viscosity $\eta_\text{eff}$ from \autoref{tab:eff_visc} and the
-		values for the critical holding velocities from \autoref{tab:velocities}.
-	}\label{tab:holding_forces}
-	\centering
-	\begin{tblr}{colspec={lc}}
-		                          & $F_\text{trap}$             \\
-		Big @\SI{50}{\percent}    & \SI{0.43(16)}{\pico\newton} \\
-		Big @\SI{100}{\percent}   & \SI{1.1(4)}{\pico\newton}   \\
-		Small @\SI{50}{\percent}  & \SI{0.19(8)}{\pico\newton}  \\
-		Small @\SI{100}{\percent} & \SI{0.8(3)}{\pico\newton}
-	\end{tblr}
-\end{table}
+\section{Diskussion}\label{sec:diskussion}
 
 % probably we are in the second focus not the third which means that the particles are pulled to the 
 % glass interface. This would explain a reduced holding force due to scraping and that the effective 
 % viscosity conforms to the literature value. Furthermore this would
 % also explain the why the angular momentum transfer didn't work.
-
-\subsection{Characterization of unknown sample}
-
-\subsection{Trapping of living organisms}
-
-\subsection{Transfer of angular momentum}
-
-\section{Diskussion}\label{sec:diskussion}
-
 \subsection{Microscope}
 
 \subsection{Lasergun}
