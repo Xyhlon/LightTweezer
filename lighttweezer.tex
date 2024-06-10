@@ -52,7 +52,7 @@ During the experiment the following steps need to be performed:
 	\item Transfer a angular momentum to a particle
 \end{itemize}
 
-\section{Grundlagen}\label{Grund}
+\section{Basic concepts}\label{Grund}
 
 % Brownian motion connection to viscosity then connection to slope of squared displacement
 % then connection between trap stiffness and holding force.
@@ -63,7 +63,7 @@ fluid, discovered by Robert Brown in 1827. This motion results from collisions
 with the molecules of the surrounding medium, which are in constant thermal
 motion.
 
-Diffusion Constant (D) quantifies how fast particles diffuse in a medium. It is
+Diffusion Constant ($D$) quantifies how fast particles diffuse in a medium. It is
 influenced by the temperature of the medium, the viscosity, and the size of the
 diffusing particles.
 
@@ -218,6 +218,7 @@ regions of varying intensity and gradient, and the sphere tends to move towards
 the region of highest intensity. The geometrical momentum transfer and gradient
 force is visualized below.\cite{bustamanteOpticalTweezersSinglemolecule2021}
 
+% todo cite pic
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/mieworkingprinciple.pdf}
@@ -327,7 +328,7 @@ steps.
 
 The single optical components, as well as the beampath are visible in
 \autoref{fig:aufbau_banzer}.
-
+%todo cite pic unterlagen
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width =0.9\textwidth]{./figures/aufbau_banzer.JPG}
@@ -340,24 +341,26 @@ The single optical components, as well as the beampath are visible in
 
 For the setup the following parts in \autoref{tab:gerate} are used.
 
-%todo
-
 \begin{table}[H]
 	\begin{center}
-		\caption{Verwendete Geräte für die Abbildung durch eine Sammellinse
+		\caption{Used parts for the experiment
 		}
 		\begin{tblr}{cells={font=\footnotesize},colspec={lllll}}
-			\textbf{Gerätetyp}               & \textbf{Hersteller} & \textbf{Typ} & \textbf{Anmerkung} \\
-			Linse                            &                     &              & zu bestimmen       \\
-			Lens Mount                       & ThorLabs            & LMR1/M       &                    \\
-			Optical Posts                    & ThorLabs            & TR3          &                    \\
-			Rail Carrier                     & ThorLabs            & XT34TR1/M    & 3x                 \\
-			Halogenlampe                     & ThorLabs            & QTH10/M      &                    \\
-			Mount for Rectangular Optics     & ThorLabs            & XYF1/M       &                    \\
-			Resolution and Distortion Target & ThorLab             & R1L3S5P      &                    \\
-			Aluminium-Schiene                &                     &              &                    \\
-			Schirm                           &                     &              & selbst gebaut      \\
-			Schibelehre                      & Workzone            & 819547       & digital            \\
+			\textbf{Device}               & \textbf{Producer} & \textbf{type} & \textbf{Sidemark} \\
+			Camera                            &  ThorLabs                   &    CS165CU/M          &        \\
+			Imaging Lens                       & ThorLabs            &       &                    \\
+			Shortpass Filter                    & ThorLabs            &           &                    \\
+			Dichroic Mirror                     & ThorLabs            &     &                  \\
+			Microscope Objective                     & Zeiss            & 421080-9900      &  63x                  \\
+			Sample Holder     &             &       &                    \\
+			White-Light LED & ThorLabs             & LEDD18      &                    \\
+			Mirror                &   ThorLabs                &              &   2x                 \\
+			2 Lenses                           & ThorLabs                  &              & as Telescope      \\
+			Collimator Lens                      & ThorLabs            &       &             \\
+			Laser                      & ThorLabs            &  Kinesis     &             \\
+			Brushed Motor Controller                      & ThorLabs            &       &  for navigation of sample           \\
+			Stage                      & ThorLabs            &       &             \\
+			Breadboard                      & ThorLabs            &       &             \\
 		\end{tblr}\label{tab:gerate}
 	\end{center}
 \end{table}
@@ -447,6 +450,8 @@ effective viscosity $\eta_\text{eff}$ one gets:
 But firstly one needs to calculate the mean squared displacements $s$ for each
 of the particle trajectories.
 
+%todo bilder größer damit sichtbar
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.48\textwidth]{figures/I1_particle_1.pdf}
@@ -520,9 +525,17 @@ particles drift towards an edge of the sample. This can be observed by a
 "dry-wall" \ that starts to move over the sample, as visible in
 \autoref{fig:dry_wall}
 
-% todo pic dry wall
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/drywall.JPG}
+	\caption[Dry-wall]{Dry-wall on the sample
+	}\label{fig:dry_wall}
+\end{figure}
 
-trocknung
+
+
+
+% todo trocknung ?
 \subsection{Lasergun}
 % Discuss and explain the observed effects. 
 % What other mechanisms in light-matter interactions could be taken 
@@ -536,9 +549,8 @@ the laser can be switched on and the power can slowly be increased.
 
 Once again the z-position of the stage needs to be increased until the focus of
 the laser becomes visible in the plane. There are in total 3 positions where
-the laser beam is visible which is shown in \autoref{fig:laser_focus}.
+the laser beam is visible.
 
-%todo pic laserfocus
 
 When the laser is in focus one can try to kick some particles with the laser
 beam by varying its power and moving it across the sample. This works on the
@@ -649,7 +661,7 @@ procedure is now repeated for different laser powers and for 2 different
 particle sizes. The results are visible in \autoref{tab:velocities}.
 
 \begin{table}[H]
-	\caption{This table contains measured velocities and whether the particle
+	\caption[Measured velocities]{This table contains measured velocities and whether the particle
 		remained trapped moving with the velocity at a certain laser power.
 		All velocities are measured in \si{\milli\meter\per\second}. Here
 		is max power of the laser diode \SI{50}{\milli\watt} at \SI{100}{\milli\ampere}
@@ -686,7 +698,7 @@ law of Stokes, which is given by the equation:
 \end{equation}
 
 \begin{table}[H]
-	\caption{This table contains the calculated holding forces $F_\text{trap}$ using \autoref{eq:holding_force}
+	\caption[Calculated holding forces]{This table contains the calculated holding forces $F_\text{trap}$ using \autoref{eq:holding_force}
 		and the obtained value for the effective viscosity $\eta_\text{eff}$ from \autoref{tab:eff_visc} and the
 		values for the critical holding velocities from \autoref{tab:velocities}.
 	}\label{tab:holding_forces}
@@ -716,33 +728,41 @@ For this part the sample is changed. When removing the object holder it is
 important to go down in z-direction with the sample stage in order to do not
 hit the objective by changing the sample.
 
-Now the objective colder can be cleaned and the new sample, labeled "unknown"\
+Now the objective colder can be cleaned and the new sample, labeled ''unknown''
 placed on it.
 
 When everything is attached and the laser beam is in focus again, one can try
 to search new particles. What one immediately sees is, that the new sample
-seems to contain particles that can absorb the laser beam, because one cam
+seems to contain particles that can absorb the laser beam, because one can
 "blow" \ them up.
 
-%todo foto
+%todo foto haben wir leider nit oder
 
 What one can also observe with the bare eye is that the whole sample seems red,
 although there are also e few particles inside it, so the have a huge coloring
 effect.
 
+Due to the huge impact of the laser light, one can state that the unknown sample contains
+metal particles. Since the particle are really small
+they are probably smaller then the wavelength of the light.
+This would also explain the purple colour of the sample due to Rayleigh regime.
+So they seem to be nanoparticles of gold, which was also confirmed by the tutor.
+
 \subsection{Trapping of living organisms}
 % Discuss your findings and compare them to the previous experiments. 
 
 For this part of the experiment one needs a sample with living bacteria on it.
-Therefore, a gulp of "ayran" \ gets diluted with water to make it transparent.
+Therefore, a gulp of ''ayran'' gets diluted with water to make it transparent.
 
 When everything is aligned and the laser is switched on again, one can try to
 find a bacterium. These bacteria can be easily detected due to their
-non-erratic movement. These bacteria have a major and minor axis and have
+non-erratic movement. The bacteria have a major and minor axis and have
 cylindrical symmetry, once they enter the trap one can immediately observe,
 that it stops its movement and its major axis aligns with the laser beam, as
 visible in \autoref{fig:bacterium}. This happens, because this alignment is
 energetically favorable.
+
+% todo pic
 
 These particles are probably staphylococci, because their more spherical nature
 than streptococci. They also build smaller chains and this is in agreement with
@@ -766,9 +786,9 @@ washed out.\cite{ghazalMicrobiologicalHygenicDiscussion2024}
 
 For this part of the experiment it is important to choose a particle, which has
 the necessary properties to transfer the angular momentum of the laser to it.
-This is the reason why, "vaterite" \ is used as a sample, since it birefringent
+This is the reason why, ''vaterite'' is used as a sample, since it birefringent
 (see \autoref{sec:angularMomentumTransfer} for the other necessary properties
-for this behavior). To avoid pollution of the "ayran"\ sample this sample is
+for this behavior). To avoid pollution of the ''ayran'' sample this sample is
 placed on a new object holder.
 
 When everything is aligned one navigates through the sample and searches for a
@@ -788,7 +808,7 @@ explained, because many parameters need to fit in order to create that effect.
 
 %todo willst du da no mehr schreiben dazu?
 
-\section{Diskussion}\label{sec:diskussion}
+\section{Discussion}\label{sec:diskussion}
 
 % probably we are in the second focus not the third which means that the particles are pulled to the 
 % glass interface. This would explain a reduced holding force due to scraping and that the effective 
@@ -808,7 +828,10 @@ explained, because many parameters need to fit in order to create that effect.
 
 \subsection{Transfer of angular momentum}
 
-\section{Zusammenfassung}\label{sec:zusammenfassung}
+
+
+
+\section{Conclusion}\label{sec:zusammenfassung}
 
 \subsection{Microscope}
 
