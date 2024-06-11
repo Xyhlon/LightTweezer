@@ -374,6 +374,8 @@ in combinations with the packages \verb#scikit-learn#, \verb#numpy#,
 In order to ensure the highest possible accuracy, the values are not rounded
 until they are displayed in tables.
 
+Regarding the images it is very important to save them in the correct format, so that they can be displayed later.
+
 \subsection{Microscope}\label{seq:durchfurung_microscope}
 
 For this part only the microscope module form \autoref{fig:aufbau} is needed.
@@ -449,7 +451,6 @@ effective viscosity $\eta_\text{eff}$ one gets:
 But firstly one needs to calculate the mean squared displacements $s$ for each
 of the particle trajectories.
 
-%todo bilder größer damit sichtbar
 
 \begin{figure}[H]
 	\centering
@@ -544,8 +545,7 @@ laser safety googles, when the laser is turned on. When everything is prepared
 the laser can be switched on and the power can slowly be increased.
 
 Once again the z-position of the stage needs to be increased until the focus of
-the laser becomes visible in the plane. There are in total 3 positions where
-the laser beam is visible.
+the laser becomes visible in the plane.
 
 
 When the laser is in focus one can try to kick some particles with the laser
@@ -577,7 +577,9 @@ to be trapped.
 
 To also increase the power of the laser beam, the telescope cage, visible in
 \autoref{fig:aufbau}, is included to the setup, in order to focus the radiation
-pressure of the beam. The interesting thing is, that the telescope didn't have
+pressure of the beam. There are in total 3 positions where
+the laser beam is visible. It is important to work in the 3rd fokal plane.
+The interesting thing is, that the telescope didn't have
 a visible effect on the trapping strength. This was a bit odd and will be
 discussed in \autoref{sec:diskussion}.
 
@@ -844,7 +846,16 @@ Reasons for this will be discussed later in \autoref{sec:diskussion}.
 
 \section{Conclusion}\label{sec:zusammenfassung}
 
-\subsection{Microscope}
+%\subsection{Microscope}
+
+The Setup for the microscope worked out and it was possible to build a working microscope, which allowed to track the motion of 
+some particles, as visible in \autoref{fig:part_overview_1}. Due to the brownian motion it was possible to determine the total
+viscosity $\hat{\eta_\text{eff}}$, which gave the following result.
+
+\begin{equation*}
+	\hat{\eta_\text{eff}} = \SI{0.9(4)}{\milli\pascal\second}
+\end{equation*}
+
 
 \subsection{Lasergun}
 
