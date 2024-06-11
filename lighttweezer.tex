@@ -15,7 +15,6 @@
 
 % Fußzeile
 \addbibresource{PhotonScience.bib}
-%todo bib
 
 \usepackage{luacode}
 
@@ -327,13 +326,13 @@ steps.
 
 The single optical components, as well as the beampath are visible in
 \autoref{fig:aufbau_banzer}.
-%todo cite pic unterlagen
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width =0.9\textwidth]{./figures/aufbau_banzer.JPG}
 	\end{center}
 	\caption[Optical setup] { Optical setup with drawn beampath
-	}\label{fig:aufbau_banzer}%todo \cite{unterlagen}
+	}\label{fig:aufbau_banzer}
+	\cite{banzerLIGHTTWEEZERS}
 \end{figure}
 
 \section{Materials}\label{sec:geraeteliste}
@@ -739,8 +738,6 @@ to search new particles. What one immediately sees is, that the new sample
 seems to contain particles that can absorb the laser beam, because one can
 "blow" \ them up.
 
-%todo foto haben wir leider nit oder
-
 What one can also observe with the bare eye is that the whole sample seems red,
 although there are also e few particles inside it, so the have a huge coloring
 effect.
@@ -872,16 +869,20 @@ were found for this setup, we cannot conclude this with complete certainty.
 
 Due to all the observations (color, electromagnetic interaction, size) it was
 concluded that the sample contains nanoparticles of gold, which was also
-confirmed by the tutor. The active region for gold particles of a size of \SI{50}{\nano\meter} was simulated and is visible in \autoref{fig:gold}.
-It is visible that there happens to be a big peak in the violett/blue region and also another one in the red area,
-which would in total result in the observed colour. What is also visible in the graph is that mainly the dipole part of the particle 
-is present (orange in graph), which is a strong indicator for the Rayleigh regime.
+confirmed by the tutor. The active region for gold particles of a size of
+\SI{50}{\nano\meter} was simulated and is visible in \autoref{fig:gold}. It is
+visible that there happens to be a big peak in the violett/blue region and also
+another one in the red area, which would in total result in the observed
+colour. What is also visible in the graph is that mainly the dipole part of the
+particle is present (orange in graph), which is a strong indicator for the
+Rayleigh regime.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{figures/gold.png}
-	\caption[Simulated active region for gold particles]{Simulated active region for gold particles of a size of \SI{50}{\nano\meter}
-	orange \dots dipole contribution of scattering  %todo \cite
+	\caption[Simulated active region for gold particles]{Simulated active region for gold
+		particles of a size of \SI{50}{\nano\meter} orange \dots dipole contribution of
+		scattering \cite{ladutenkoOvidioprScattnlaySmall2017}.
 	}\label{fig:gold}
 \end{figure}
 
@@ -953,3 +954,4 @@ particle. Reasons for that are discussed in \autoref{sec:diskussion}. \newpage
 %   pages = "121--128",
 %   year = "1917",
 % }
+
